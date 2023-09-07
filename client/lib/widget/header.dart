@@ -4,8 +4,8 @@ class MyHeader extends StatelessWidget {
   final String text;
   final Color bgColor;
   final Color elementColor;
-  final Widget? icon;
-  final Widget? path;
+  final Widget? icon;  // 오른쪽 상단에 들어갈 아이콘 (ex. Icon(Icons.arrow_back))
+  final Widget? path;  // 오른쪽 상단 아이콘을 클릭했을 때 이동할 곳
 
   MyHeader({
     super.key,
