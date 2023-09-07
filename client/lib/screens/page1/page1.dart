@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:keeping/widget/bottom_nav.dart';
 import 'package:keeping/widget/header.dart';
 
 class Page1 extends StatelessWidget {
@@ -7,16 +8,17 @@ class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Row(
+      body: Column(
         children: [
           MyHeader(
             text: '제목',
             elementColor: Colors.black,
             icon: Icon(Icons.arrow_circle_up),
             path: Page1(),
-          )
+          ),
         ],
       ),
+      bottomNavigationBar: BottomNav()
     );
   }
 }
