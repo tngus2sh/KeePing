@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './widgets/createMissonBox.dart';
 import './widgets/MissionBox.dart';
 import './widgets/filteringBar.dart';
+import '../../util/axios_test.dart';
 
 final List<Map<String, dynamic>> missions = [
   {
@@ -104,7 +105,14 @@ class MissionPage extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final mission = missions[index];
                       return MissionBox(mission: mission);
-                    }))
+                    })),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AxiosTest()));
+              },
+              child: const Text('axiosText!!'),
+            )
           ],
         )));
   }
