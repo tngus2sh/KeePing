@@ -26,14 +26,19 @@ public class Member extends TimeBaseEntity {
     @Size(max = 20, min = 5)
     private String loginId;
 
-    @Column(nullable = false, length = 25)
-    @Size(max = 25, min = 5)
+    @Column(nullable = false)
     private String encryptionPw;
 
+    @Column(nullable = false, length = 20)
+    @Size(max = 20, min = 1)
     private String name;
+
+    @Column(nullable = false, length = 13)
+    @Size(max = 13, min = 13)
     private String phone;
     private LocalDateTime birth;
     private String profileImage;
+    @Column(nullable = true)
     private String fcmToken;
     private boolean active;
 
