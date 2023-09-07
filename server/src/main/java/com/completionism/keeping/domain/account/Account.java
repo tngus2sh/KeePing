@@ -48,4 +48,14 @@ public class Account extends TimeBaseEntity {
         this.active = active;
     }
 
+    public static Account toAccount(Member member, String accountNumber, String authPassword, Long balance, boolean active) {
+        return Account.builder()
+                .member(member)
+                .accountNumber(accountNumber)
+                .authPassword(authPassword)
+                .balance(balance)
+                .active(active)
+                .build();
+    }
+
 }
