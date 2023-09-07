@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MissionBox extends StatelessWidget {
-  final List<Map<String, dynamic>> missions;
-  MissionBox({required this.missions});
+  final Map<String, dynamic> mission;
+  MissionBox({required this.mission});
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +13,11 @@ class MissionBox extends StatelessWidget {
         color: Colors.blue,
         child: (Row(
           children: [
-            Text(missions[0]["id"].toString()),
-            Text(missions[0]["todo"]),
-            Text(missions[0]["money"].toString()),
-            Text(missions[0]["deadline"]),
-            Text(missions[0]["completed"].toString()),
+            Text(mission["id"].toString()),
+            Text(mission["todo"]),
+            Text(mission["money"].toString()),
+            Text(mission["deadline"]),
+            Text(mission["completed"]),
           ],
         )));
   }
