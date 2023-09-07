@@ -3,6 +3,7 @@ import '../page1/page1.dart';
 import '../page2/page2.dart';
 import '../page3/page3.dart';
 import '../missionPage/missionPage.dart';
+import '../signUpPage/signUpUserTypeSelectPage.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -14,13 +15,23 @@ class MainPage extends StatelessWidget {
           child: Row(
         children: [
           ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const MissionPage()));
-              },
-              child: const Text('미션페이지'))
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const MissionPage()));
+            },
+            child: const Text('미션페이지'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SignUpPage(), // 회원가입 페이지로 이동
+                ),
+              );
+            },
+            child: const Text('회원가입'), // 회원가입 버튼 추가
+          ),
         ],
       )),
       bottomNavigationBar: BottomAppBar(
