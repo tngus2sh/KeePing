@@ -25,13 +25,13 @@ class ConfirmBtn extends StatelessWidget {
           Navigator.pop(context)
         );
       },
-      child: Text(text),
       style: confirmBtnStyle(bgColor, textColor),
+      child: Text(text),
     );
   }
 }
 
-confirmBtnStyle (Color bgColor, Color textColor) {
+ButtonStyle confirmBtnStyle (Color bgColor, Color textColor) {
   return ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(bgColor),
     textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(fontSize: 18, color: textColor)),

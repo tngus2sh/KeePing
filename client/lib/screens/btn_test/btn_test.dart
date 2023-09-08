@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:keeping/screens/btn_test/btn_test.dart';
+import 'package:keeping/widgets/bottom_btn.dart';
 import 'package:keeping/widgets/bottom_nav.dart';
 import 'package:keeping/widgets/confirm_btn.dart';
 import 'package:keeping/widgets/header.dart';
 
-class Page1 extends StatelessWidget {
-  const Page1({super.key});
+class BtnTest extends StatelessWidget {
+  const BtnTest({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +15,12 @@ class Page1 extends StatelessWidget {
           MyHeader(
             text: '제목',
             elementColor: Colors.black,
-            icon: Icon(Icons.arrow_circle_up),
-            path: Page1(),
           ),
-          ConfirmBtn(text: '확인', path: BtnTest(),)
         ],
       ),
-      bottomNavigationBar: BottomNav()
+      bottomNavigationBar: BottomBtn(
+        text: '다음',
+      )
     );
   }
 }

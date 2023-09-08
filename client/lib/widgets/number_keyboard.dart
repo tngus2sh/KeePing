@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:keeping/widget/number_keyboard_key.dart';
+import 'package:keeping/widgets/number_keyboard_key.dart';
 import 'package:intl/intl.dart';
 
 class NumberKeyboard extends StatefulWidget {

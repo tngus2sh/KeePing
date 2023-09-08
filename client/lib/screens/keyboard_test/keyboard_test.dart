@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:keeping/screens/keyboard_test/widgets/value_input_test.dart';
-import 'package:keeping/widget/header.dart';
-import 'package:keeping/widget/number_keyboard.dart';
+import 'package:keeping/widgets/header.dart';
+import 'package:keeping/widgets/number_keyboard.dart';
 
 class KeyboardTest extends StatelessWidget {
   const KeyboardTest({super.key});
