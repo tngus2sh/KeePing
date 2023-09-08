@@ -35,12 +35,8 @@ public class AddMissionRequest {
     
     private String cheeringMessage; // 부모 응원 메시지
 
-    @NotBlank
-    @FutureOrPresent
     private LocalDate startDate; // 미션 시작일
 
-    @NotBlank
-    @FutureOrPresent
     private LocalDate endDate; // 미션 마감일
 
     @Builder
