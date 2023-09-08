@@ -23,6 +23,10 @@ public class RedisUtils {
         redisTemplate.opsForValue().set(key, objectMapper.writeValueAsString(o), ttl, TimeUnit.SECONDS);
     }
 
+    public void setRedisValue(String key, Object o) throws JsonProcessingException {
+        redisTemplate.opsForValue().set(key, objectMapper.writeValueAsString(o));
+    }
+
     public void setRedisHash(String key, String loginId, String message, Long ttl) {
         HashOperations<String, String, String> hashOperations = stringRedisTemplate.opsForHash();
         hashOperations.put(key, loginId, message);
@@ -31,6 +35,10 @@ public class RedisUtils {
 
     public <T> T getRedisValue(String key, Class<T> classType) throws JsonProcessingException {
         String redisValue = redisTemplate.opsForValue().get(key);
+
+        if(redisValue == null) {
+            return null;
+        }
 
         return objectMapper.readValue(redisValue, classType);
     }
