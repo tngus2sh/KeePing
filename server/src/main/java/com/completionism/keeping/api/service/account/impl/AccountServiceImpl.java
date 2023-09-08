@@ -8,6 +8,7 @@ import com.completionism.keeping.domain.member.Member;
 import com.completionism.keeping.global.utils.RedisUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ public class AccountServiceImpl implements AccountService {
 //    private final MemberRepository memberRepository;
     private final AccountRepository accountRepository;
     private final RedisUtils redisUtils;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Long addAccount(String loginId, AddAccountDto dto) throws JsonProcessingException {
@@ -29,7 +31,7 @@ public class AccountServiceImpl implements AccountService {
 
         String accountNumber = createNewAccountNumber();
 
-        Account account = Account.toAccount(member, accountNumber, dto.getAuthPassword(), 0l, true);
+        Account account = Account.toAccount(member, accountNumber, passwordEncoder.encode(dto.getAuthPassword()), 0l, true);
         Account saveAccount = accountRepository.save(account);
 
         return saveAccount.getId();
@@ -42,7 +44,7 @@ public class AccountServiceImpl implements AccountService {
         do {
             num = rand.nextInt(888889) + 111111;
         }
-        while(!redisUtils.getRedisValue("Account_" + String.valueOf(num), String.class).equals("null"));
+        while(redisUtils.getRedisValue("Account_" + String.valueOf(num), String.class) != null);
 
         String randomNumber = String.valueOf(num);
         redisUtils.setRedisValue("Account_" + randomNumber, "true");
@@ -56,7 +58,7 @@ public class AccountServiceImpl implements AccountService {
             int num2 = divideNum % 10;
 
             int sum = 0;
-            if(num == 1) {
+            if(i == 1) {
                 sum = (num1 * num2) % 10;
             }
             else {
