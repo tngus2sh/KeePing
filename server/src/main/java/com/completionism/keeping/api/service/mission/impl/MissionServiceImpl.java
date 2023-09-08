@@ -32,32 +32,34 @@ public class MissionServiceImpl implements MissionService {
     public Long addMission(String memberId, AddMissionDto dto) {
 //        // memberId와 dto의 미션을 준 주체(dto.getType())로 해당 멤버가 있는지 확인
 //        Member member = memberRepository.findByloginIdAndType(memberId, dto.getType()).orElseThrow(NotFoundException::new); // TODO: member완성시 해제
-//        
+//
+//        // TODO: 2023-09-08 부모의 계좌에 들어있는 금액 한도 내에서 가능
+//
 //        // 부모가 자녀에게 미션을 주는 거라면 Completed(완성여부)를 YET으로 설정
-//        if (dto.getType().equals("PARENT")) {
-//            // 해당 자녀가 있는지 확인
-//            Child child = childRepository.findBymemberId(dto.getTo()).orElseThrow(NotFoundException::new); // TODO: member완성시 해제
-//            
+//        if (dto.getType().equals(MissionType.PARENT)) {
+//            // TODO: 2023-09-08 해당 자녀가 있는지 확인 
+//            Child child = childRepository.findBymemberId(dto.getTo()).orElseThrow(NotFoundException::new);
+//
 //            Mission mission = Mission.toMission(child, dto.getType(), dto.getTodo(), dto.getMoney(), dto.getCheeringMessage(),dto.getStartDate(), dto.getEndDate(), Completed.YET);
 //            Mission savedMission = missionRepository.save(mission);
-//            
+//
 //            // TODO: 자녀에게 알림 전송
-//            
+//
 //            // TODO: 알림 저장
-//            
+//
 //            return savedMission.getId();
 //        }
-//        
+//
 //        // 자녀가 부모에게 미션을 주는 거라면 Completed(완성여부)를 CREATE_WAIT으로 설정
-//        else if (dto.getType().equals("CHILD")) {
-//            // 해당 자녀가 있는지 확인
+//        else if (dto.getType().equals(MissionType.CHILD)) {
+//            // TODO: 2023-09-08 해당 자녀가 있는지 확인 
 //            Child child = childRepository.findBymemberId(memberId).orElseThrow(NotFoundException::new);
-//            
+//
 //            Mission mission = Mission.toMission(child, dto.getType(), dto.getTodo(), dto.getMoney(), dto.getCheeringMessage(), dto.getStartDate(), dto.getEndDate(), Completed.CREATE_WAIT);
 //            Mission savedMission = missionRepository.save(mission);
 //
 //            // TODO: 부모에게 알림 전송
-//            
+//
 //            // TODO: 알림 저장
 //
 //            return savedMission.getId();
