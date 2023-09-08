@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:keeping/widget/bottom_btn.dart';
 import 'package:keeping/widget/bottom_nav.dart';
+import 'package:keeping/widget/confirm_btn.dart';
 import 'package:keeping/widget/header.dart';
 
 class Page1 extends StatelessWidget {
@@ -17,7 +18,7 @@ class Page1 extends StatelessWidget {
             icon: Icon(Icons.arrow_circle_up),
             path: Page1(),
           ),
-          BottomBtn(context: context, text: '확인')
+          ConfirmBtn(text: '확인')
         ],
       ),
       bottomNavigationBar: BottomNav()
