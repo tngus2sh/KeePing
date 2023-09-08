@@ -5,15 +5,12 @@ import com.completionism.keeping.api.service.account.dto.AddAccountDto;
 import com.completionism.keeping.domain.account.Account;
 import com.completionism.keeping.domain.account.repository.AccountRepository;
 import com.completionism.keeping.domain.member.Member;
-import com.completionism.keeping.global.exception.NotFoundException;
 import com.completionism.keeping.global.utils.RedisUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -26,27 +23,50 @@ public class AccountServiceImpl implements AccountService {
     private final RedisUtils redisUtils;
 
     @Override
-    public Long addAccount(String loginId, AddAccountDto dto) {
+    public Long addAccount(String loginId, AddAccountDto dto) throws JsonProcessingException {
         Member member = null;
 //        Member member = memberRepository.findByLoginId(loginId).orElseThrow(() -> new NotFoundException("404", HttpStatus.NOT_FOUND, "해당 회원이 존재하지 않습니다."));
 
-        Random rand = new Random();
-        int num = rand.nextInt(888889) + 111111;
-
-        try {
-            if(redisUtils.getRedisValue(String.valueOf(num), String.class).equals("")) {
-
-            }
-        } catch(JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-
-
-        String accountNumber = "171-" + "" + "" + ""; // 3-6-3-2
+        String accountNumber = createNewAccountNumber();
 
         Account account = Account.toAccount(member, accountNumber, dto.getAuthPassword(), 0l, true);
         Account saveAccount = accountRepository.save(account);
 
         return saveAccount.getId();
+    }
+
+    private String createNewAccountNumber() throws JsonProcessingException {
+        Random rand = new Random();
+
+        int num = 0;
+        do {
+            num = rand.nextInt(888889) + 111111;
+        }
+        while(!redisUtils.getRedisValue("Account_" + String.valueOf(num), String.class).equals("null"));
+
+        String randomNumber = String.valueOf(num);
+        redisUtils.setRedisValue("Account_" + randomNumber, "true");
+
+        String validCode = "";
+
+        int divideNum = num;
+        for(int i = 0; i < 3; i++) {
+            int num1 = divideNum % 10;
+            divideNum /= 10;
+            int num2 = divideNum % 10;
+
+            int sum = 0;
+            if(num == 1) {
+                sum = (num1 * num2) % 10;
+            }
+            else {
+                sum = (num1 + num2) % 10;
+            }
+            divideNum /= 10;
+
+            validCode = String.valueOf(sum) + validCode;
+        }
+
+        return "171-" + randomNumber + "-" + validCode + "-27"; // 3-6-3-2
     }
 }
