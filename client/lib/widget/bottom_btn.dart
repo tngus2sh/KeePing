@@ -9,7 +9,7 @@ class BottomBtn extends StatelessWidget {
   BottomBtn({
     super.key,
     required this.text,
-    this.bgColor = Colors.purple,
+    this.bgColor = const Color(0xFF8320E7),
     this.textColor = Colors.white,
     this.path
   });

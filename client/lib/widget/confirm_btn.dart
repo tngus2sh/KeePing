@@ -26,18 +26,22 @@ class ConfirmBtn extends StatelessWidget {
         );
       },
       child: Text(text),
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(bgColor),
-        textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(fontSize: 18, color: textColor)),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0), // 테두리 둥글기 반지름 설정
-          ),
-        ),
-        minimumSize: MaterialStateProperty.all<Size>(
-          Size(300.0, 50.0), // 버튼의 최소 높이와 너비 설정
-        ),
-      ),
+      style: confirmBtnStyle(bgColor, textColor),
     );
   }
+}
+
+confirmBtnStyle (Color bgColor, Color textColor) {
+  return ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(bgColor),
+    textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(fontSize: 18, color: textColor)),
+    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30.0), // 테두리 둥글기 반지름 설정
+      ),
+    ),
+    minimumSize: MaterialStateProperty.all<Size>(
+      Size(300.0, 50.0), // 버튼의 최소 높이와 너비 설정
+    ),
+  );
 }
