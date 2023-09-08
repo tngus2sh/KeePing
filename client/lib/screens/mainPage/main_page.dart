@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../page1/page1.dart';
 import '../page2/page2.dart';
 import '../page3/page3.dart';
-import '../missionPage/missionPage.dart';
+import 'package:keeping/screens/missionPage/mission_page.dart';
 import '../signUpPage/signUpUserTypeSelectPage.dart';
 
 class MainPage extends StatelessWidget {
@@ -17,7 +17,7 @@ class MainPage extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const MissionPage()));
+                  MaterialPageRoute(builder: (context) => MissionPage()));
             },
             child: const Text('미션페이지'),
           ),

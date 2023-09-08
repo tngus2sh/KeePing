@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:keeping/widget/header.dart';
+import 'package:keeping/widgets/header.dart';
 
 class SignUpParent extends StatelessWidget {
   const SignUpParent({super.key});

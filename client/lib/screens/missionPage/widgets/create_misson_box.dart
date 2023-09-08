@@ -11,7 +11,7 @@ class CreateMissonBox extends StatelessWidget {
         height: 200,
         color: Colors.blue,
         child: (Center(
-          child: Text('미션생성하기',
+          child: Text('미션생성하기!!',
               style: TextStyle(color: Colors.white, fontSize: 24)),
         )));
   }
