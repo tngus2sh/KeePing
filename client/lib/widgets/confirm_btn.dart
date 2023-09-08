@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+// 확인 버튼 클래스
 class ConfirmBtn extends StatelessWidget {
   final String text;
   final Color bgColor;
   final Color textColor;
-  final Widget? path;
+  final Widget? path;  // 버튼 클릭 후 이동할 곳. 비어있으면 이전 페이지로 이동
 
   ConfirmBtn({
     super.key,
@@ -31,6 +32,7 @@ class ConfirmBtn extends StatelessWidget {
   }
 }
 
+// 버튼 스타일
 ButtonStyle confirmBtnStyle (Color bgColor, Color textColor) {
   return ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(bgColor),

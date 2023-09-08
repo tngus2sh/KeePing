@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+// 하단 네모난 버튼 클래스
 class BottomBtn extends StatelessWidget {
   final String text;
   final Color bgColor;
   final Color textColor;
-  final Widget? path;
+  final Widget? path;  // 버튼 클릭 후 이동할 곳. 비어있으면 이전 페이지로 이동
 
   BottomBtn({
     super.key,
@@ -23,7 +24,12 @@ class BottomBtn extends StatelessWidget {
       height: 70.0,
       child: TextButton(
         onPressed: () {
-          
+          path != null ? (
+            Navigator.push(
+              context, MaterialPageRoute(builder: (_) => path!))
+          ) : (
+            Navigator.pop(context)
+          );
         },
         style: bottomBtnStyle(textColor),
         child: Text(text),
@@ -32,6 +38,7 @@ class BottomBtn extends StatelessWidget {
   }
 }
 
+// 버튼 스타일
 ButtonStyle bottomBtnStyle (Color textColor) {
   return ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),

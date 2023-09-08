@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:keeping/screens/keyboard_test/keyboard_test.dart';
 import 'package:keeping/screens/page2/page2.dart';
 
+// 하단 내비게이션 클래스
 class BottomNav extends StatelessWidget {
   BottomNav({super.key});
 

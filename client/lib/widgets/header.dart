@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// 상단 헤더 클래스
 class MyHeader extends StatelessWidget {
   final String text;
   final Color bgColor;
