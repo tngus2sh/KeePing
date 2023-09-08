@@ -6,6 +6,7 @@ import com.completionism.keeping.domain.mission.MissionType;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
@@ -30,7 +31,7 @@ public class AddMissionRequest {
 
     @NotNull
     @Positive
-    @Size(min = 10, max = 10000)
+    @Range(min = 10, max = 10000)
     private int money; // 미션 보상금
     
     private String cheeringMessage; // 부모 응원 메시지
