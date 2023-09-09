@@ -25,9 +25,13 @@ class BottomModal extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,  // 모달 높이 자동으로 지정
         children: [
+          SizedBox(height: 15),
           modalHeader(title, context),
+          SizedBox(height: 15),
           content,
+          SizedBox(height: 25),
           button,
+          SizedBox(height: 25),
         ],
       ),
     );
@@ -37,8 +41,11 @@ class BottomModal extends StatelessWidget {
 // 모달 헤더 위젯
 Widget modalHeader(String title, BuildContext context) {
   return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    crossAxisAlignment: CrossAxisAlignment.center,
     children: [
-      Text(title),
+      SizedBox(width: 50,),
+      Text(title, style: TextStyle(fontSize: 25),),
       modalCancleBtn(context)
     ],
   );
@@ -50,6 +57,6 @@ Widget modalCancleBtn(BuildContext context) {
     onPressed: () {
       Navigator.pop(context);
     },
-    child: Icon(Icons.cancel)
+    child: Icon(Icons.cancel, size: 35,)
   );
 }
