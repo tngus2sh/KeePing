@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// 상단 헤더 클래스
+// body에 들어가는 상단 헤더 클래스
 class MyHeader extends StatelessWidget {
   final String text;
   final Color bgColor;
@@ -19,38 +19,46 @@ class MyHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    final double statusBarSize = MediaQuery.of(context).padding.top;  // 상태표시줄 높이
+
     return Container(
       color: bgColor,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
         children: [
-          IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_back),
-            color: elementColor,
-            iconSize: 40.0,
+          SizedBox(height: statusBarSize + 5,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(Icons.arrow_back),
+                color: elementColor,
+                iconSize: 40.0,
+              ),
+              Text(
+                text,
+                style: TextStyle(
+                  color: elementColor,
+                  fontSize: 25.0,
+                ),
+              ),
+              (icon != null && path != null)  // 오른쪽 아이콘이 없을 경우 SizedBox를 추가해 정렬에 문제없도록 처리
+                ? IconButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => path!));
+                  },
+                  icon: icon!,
+                  color: elementColor,
+                  iconSize: 40.0,
+                )
+                : SizedBox(width: 45,)
+            ]
           ),
-          Text(
-            text,
-            style: TextStyle(
-              color: elementColor,
-              fontSize: 25.0,
-            ),
-          ),
-          if (icon != null && path != null)
-            IconButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) => path!));
-              },
-              icon: icon!,
-              color: elementColor,
-              iconSize: 40.0,
-            )
-        ]
-      ),
+          SizedBox(height: 5,)
+        ],
+      )
     );
   }
 }
