@@ -15,14 +15,25 @@ class BottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.7),
+            spreadRadius: 0,
+            blurRadius: 5.0,
+            offset: Offset(0, 0),
+          ),
+        ],
+      ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (_) => KeyboardTest()));
             },
-            icon: Icon(Icons.numbers),
+            icon: Icon(Icons.notifications),
             color: elementColor,
             iconSize: 40.0,
           ),
@@ -30,7 +41,7 @@ class BottomNav extends StatelessWidget {
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (_) => path));
             },
-            icon: icon,
+            icon: Icon(Icons.home),
             color: elementColor,
             iconSize: 40.0,
           ),
@@ -38,7 +49,7 @@ class BottomNav extends StatelessWidget {
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (_) => path));
             },
-            icon: icon,
+            icon: Icon(Icons.person),
             color: elementColor,
             iconSize: 40.0,
           )
