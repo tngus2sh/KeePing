@@ -53,7 +53,7 @@ class MyHeader extends StatelessWidget {
                   color: elementColor,
                   iconSize: 40.0,
                 )
-                : SizedBox(width: 45,)
+                : SizedBox(width: 55,)
             ]
           ),
           SizedBox(height: 5,)

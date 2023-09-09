@@ -6,6 +6,7 @@ class NumberKeyboardKey extends StatefulWidget {
   final ValueSetter<dynamic> onTap;
 
   NumberKeyboardKey({
+    super.key,
     required this.label,
     required this.onTap,
     required this.value,
@@ -18,17 +19,17 @@ class NumberKeyboardKey extends StatefulWidget {
 class _NumberKeyboardKeyState extends State<NumberKeyboardKey> {
 
   renderLabel() {
-    if(widget.label is String){
-      return Text(
-        widget.label,
-        style: TextStyle(
-          fontSize: 20.0,
-          fontWeight: FontWeight.bold,
-        ),
-      );
-    }else{
+    if (widget.label is Widget) {
       return widget.label;
     }
+
+    return Text(
+      widget.label,
+      style: TextStyle(
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 
   @override
