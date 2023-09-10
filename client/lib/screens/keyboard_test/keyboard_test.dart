@@ -22,6 +22,7 @@ class KeyboardTest extends StatelessWidget {
       ),
       bottomNavigationBar: BottomBtn(
         text: '확인',
+        onPressed: onPressed,
       ),
     );
   }
@@ -52,4 +53,8 @@ Widget renderText(String amount) {
       ),
     ),
   );
+}
+
+void onPressed(BuildContext context) {
+  Navigator.pop(context);
 }
