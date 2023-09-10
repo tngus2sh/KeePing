@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import './widgets/createMissonBox.dart';
-import './widgets/MissionBox.dart';
-import './widgets/filteringBar.dart';
+import 'widgets/create_misson_box.dart';
+import 'package:keeping/screens/mission_page/widgets/mission_box.dart';
+import 'widgets/filtering_bar.dart';
 import '../../util/axios_test.dart';
+import 'package:keeping/widgets/header.dart';
 
+//전역변수들
 final List<Map<String, dynamic>> missions = [
   {
     "id": 23,
@@ -79,41 +81,50 @@ final List<Map<String, dynamic>> missions = [
   },
 ];
 
-class MissionPage extends StatelessWidget {
-  const MissionPage({super.key});
+// 미션페이지 클래스
+class MissionPage extends StatefulWidget {
+  const MissionPage({Key? key}) : super(key: key);
 
+  @override
+  State<MissionPage> createState() => _MissonPageState();
+}
+
+//미션페이지 스테이트 클래스
+class _MissonPageState extends State<MissionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Icon(Icons.arrow_back),
-          ),
-          title: Text('용돈미션'),
-        ),
         body: SizedBox(
             child: Column(
-          children: [
-            CreateMissonBox(),
-            FilteringBar(),
-            Expanded(
-                child: ListView.builder(
-                    itemCount: missions.length,
-                    itemBuilder: (context, index) {
-                      final mission = missions[index];
-                      return MissionBox(mission: mission);
-                    })),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AxiosTest()));
-              },
-              child: const Text('axiosText!!'),
-            )
-          ],
-        )));
+      children: [
+        MyHeader(text: '미션페이지!', elementColor: Colors.black),
+        CreateMissonBox(),
+        FilteringBar(),
+        missionBoxs(),
+        axiosButton(context)
+      ],
+    )));
   }
+}
+
+//미션 박스들을 ListView로 출력하는 위젯
+Widget missionBoxs() {
+  return Expanded(
+      child: ListView.builder(
+          itemCount: missions.length,
+          itemBuilder: (context, index) {
+            final mission = missions[index];
+            return MissionBox(mission: mission);
+          }));
+}
+
+//Axios 테스트로 이동하는 버튼
+Widget axiosButton(BuildContext context) {
+  return ElevatedButton(
+    onPressed: () {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => AxiosTest()));
+    },
+    child: const Text('axiosText!!'),
+  );
 }

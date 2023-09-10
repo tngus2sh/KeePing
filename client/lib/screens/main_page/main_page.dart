@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../page1/page1.dart';
 import '../page2/page2.dart';
 import '../page3/page3.dart';
-import '../missionPage/missionPage.dart';
+import '../mission_page/mission_page.dart';
 import '../signup_page/signup_user_type_select_page.dart';
 import '../login_page/login_page.dart';
 

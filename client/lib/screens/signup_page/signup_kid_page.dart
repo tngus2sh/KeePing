@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:keeping/widget/header.dart';
+import 'package:keeping/widgets/header.dart';
+import 'package:keeping/screens/signup_page/widgets/signup_kid_btn.dart';
 
 TextEditingController _userId = TextEditingController();
 TextEditingController _userPw = TextEditingController();
@@ -20,39 +21,40 @@ class _SignUpKidPageState extends State<SignUpKidPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          MyHeader(
-            text: '자녀가 회원 가입 중',
-            elementColor: Colors.black,
-            icon: Icon(Icons.arrow_circle_up),
-            path: SignUpKidPage(),
-          ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [renderSignupText()],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            MyHeader(
+              text: '자녀가 회원 가입 중',
+              elementColor: Colors.black,
+              icon: Icon(Icons.arrow_circle_up),
+              path: SignUpKidPage(),
             ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: ElevatedButton(
-          onPressed: () {
-            String userId = _userId.text;
-            String userPw = _userPw.text;
-            String userPwCk = _userPwCk.text;
-            String userName = _userName.text;
-            String userBirth = _userBirth.text;
-            String userPhoneNumber = _userPhoneNumber.text;
-            String parentPhoneNumber = _parentPhoneNumber.text;
-            // 회원가입 로직이 들어갈 예정
-          },
-          child: Text('회원가입'),
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [renderSignupText()],
+              ),
+            ),
+          ],
         ),
       ),
+      bottomNavigationBar: SignupKidBtn(
+        text: '회원가입자녀',
+        // onPressed: () {
+        //   String userId = _userId.text;
+        //   String userPw = _userPw.text;
+        //   String userPwCk = _userPwCk.text;
+        //   String userName = _userName.text;
+        //   String userBirth = _userBirth.text;
+        //   String userPhoneNumber = _userPhoneNumber.text;
+        //   String parentPhoneNumber = _parentPhoneNumber.text;
+        //   // 회원가입 로직이 들어갈 예정
+        // },
+      ),
     );
+    // );
   }
 }
 
@@ -83,42 +85,43 @@ Widget renderSignupText() {
       _buildTextField(
         controller: _userId,
         labelText: '아이디',
-        hintText: '아이디를 입력해 주세요',
+        hintText: '아이디를 입력해주세요',
       ),
       _buildTextField(
         controller: _userPw,
         labelText: '비밀번호',
-        hintText: '비밀번호를 입력해 주세요.',
+        hintText: '비밀번호를 입력해주세요.',
       ),
       _buildTextField(
         controller: _userPwCk,
         labelText: '비밀번호확인',
-        hintText: '비밀번호를 한 번 더 입력해 주세요.',
-      ),
-      _buildTextField(
-        controller: _userPwCk,
-        labelText: '비밀번호확인',
-        hintText: '비밀번호를 한 번 더 입력해 주세요.',
+        hintText: '비밀번호를 한 번 더 입력해주세요.',
       ),
       _buildTextField(
         controller: _userName,
         labelText: '이름',
-        hintText: '이름을 입력해 주세요.',
+        hintText: '이름을 입력해주세요.',
       ),
       _buildTextField(
         controller: _userBirth,
         labelText: '생년월일',
-        hintText: '생년월일 여섯 글자를 입력해 주세요.',
+        hintText: 'YYMMDD',
       ),
       _buildTextField(
         controller: _userPhoneNumber,
         labelText: '휴대폰 번호',
-        hintText: '숫자만 입력해 주세요.',
+        hintText: '- 없이 숫자만 입력해주세요. (예:01012345678)',
       ),
       _buildTextField(
           controller: _parentPhoneNumber,
           labelText: '부모님 휴대폰 번호',
-          hintText: '숫자만 입력해 주세요.')
+          hintText: '- 없이 숫자만 입력해주세요. (예:01012345678)'),
     ],
   );
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: SignUpKidPage(),
+  ));
 }

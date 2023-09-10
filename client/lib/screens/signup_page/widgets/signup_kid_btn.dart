@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 // 하단 네모난 버튼 클래스
-class BottomBtn extends StatelessWidget {
+class SignupKidBtn extends StatelessWidget {
   final String text;
+  // final String userId;
   final Color bgColor;
   final Color textColor;
   final Widget? path; // 버튼 클릭 후 이동할 곳. 비어있으면 이전 페이지로 이동
-
-  BottomBtn(
+  SignupKidBtn(
       {super.key,
       required this.text,
+      // required this.userId,
       this.bgColor = const Color(0xFF8320E7),
       this.textColor = Colors.white,
       this.path});

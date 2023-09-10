@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:keeping/screens/signup_page/signup_user_type_select_page.dart';
-import 'package:keeping/widget/header.dart';
+import 'package:keeping/widgets/header.dart';
 import './widgets/signup_btn.dart';
 
 TextEditingController _userId = TextEditingController();
