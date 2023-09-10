@@ -1,62 +1,48 @@
 import 'package:flutter/material.dart';
+import './screens/page1/page1.dart';
+import './screens/page2/page2.dart';
+import './screens/page3/page3.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const MaterialApp(
+    home: MyApp(),
+  ));
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!!!'),
-        ),
-      ),
-    );
-  }
-}
-
-class FirstScreen extends StatelessWidget {
-  const FirstScreen({super.key});
-
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('First Screen'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // Navigate to the second screen when tapped.
-          },
-          child: const Text('Launch screen'),
-        ),
-      ),
-    );
-  }
-}
-
-class SecondScreen extends StatelessWidget {
-  const SecondScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Second Screen'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // Navigate back to first screen when tapped.
-          },
-          child: const Text('Go back!'),
-        ),
-      ),
+      appBar: AppBar(),
+      body: SizedBox(child: Text('hello world!?')),
+      bottomNavigationBar: BottomAppBar(
+          child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Page1()));
+            },
+            child: const Text('Page1!'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Page2()));
+            },
+            child: const Text('Page2!'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Page3()));
+            },
+            child: const Text('Page3!'),
+          )
+        ],
+      )),
     );
   }
 }
