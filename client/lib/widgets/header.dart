@@ -29,30 +29,10 @@ class MyHeader extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.arrow_back),
-                color: elementColor,
-                iconSize: 40.0,
-              ),
-              Text(
-                text,
-                style: TextStyle(
-                  color: elementColor,
-                  fontSize: 25.0,
-                ),
-              ),
+              backBtn(context, elementColor),
+              titleText(context, elementColor, text),
               (icon != null && path != null)  // 오른쪽 아이콘이 없을 경우 SizedBox를 추가해 정렬에 문제없도록 처리
-                ? IconButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => path!));
-                  },
-                  icon: icon!,
-                  color: elementColor,
-                  iconSize: 40.0,
-                )
+                ? extraBtn(context, elementColor, icon!, path!)
                 : SizedBox(width: 55,)
             ]
           ),
@@ -61,4 +41,39 @@ class MyHeader extends StatelessWidget {
       )
     );
   }
+}
+
+// 뒤로 돌아가는 화살표 버튼
+Widget backBtn(BuildContext context, Color elementColor) {
+  return IconButton(
+    onPressed: () {
+      Navigator.pop(context);
+    },
+    icon: Icon(Icons.arrow_back),
+    color: elementColor,
+    iconSize: 40.0,
+  );
+}
+
+// 타이틀
+Widget titleText(BuildContext context, Color elementColor, String text) {
+  return Text(
+    text,
+    style: TextStyle(
+      color: elementColor,
+      fontSize: 25.0,
+    ),
+  );
+}
+
+// 있을수도 없을수도 있는 추가 버튼
+Widget extraBtn(BuildContext context, Color elementColor, Widget icon, Widget path) {
+  return IconButton(
+    onPressed: () {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => path));
+    },
+    icon: icon,
+    color: elementColor,
+    iconSize: 40.0,
+  );
 }
