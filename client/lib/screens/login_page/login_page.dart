@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:keeping/screens/signup_page/signup_user_type_select_page.dart';
 import 'package:keeping/widgets/header.dart';
-import './widgets/signup_btn.dart';
+import 'package:keeping/widgets/confirm_btn.dart';
 
 TextEditingController _userId = TextEditingController();
 TextEditingController _userPw = TextEditingController();
@@ -25,14 +25,32 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               MyHeader(
-                text: '자녀가 회원 가입 중',
+                text: '로그인',
                 elementColor: Colors.black,
                 icon: Icon(Icons.arrow_circle_up),
                 path: LoginPage(),
               ),
-              renderLoginText(),
-              loginBtn(context),
-              signUpBtn(context)
+              Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [renderLoginText()],
+                ),
+              ),
+
+              //로그인 버튼
+              ConfirmBtn(
+                text: '로그인',
+                action: login,
+              ),
+
+              //회원가입 버튼
+              ConfirmBtn(
+                text: '회원가입',
+                action: SignUpPage(),
+                textColor: const Color(0xFF8320E7),
+                bgColor: Colors.white,
+              )
             ],
           ),
         ),
@@ -41,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-// 텍스트 생성하는 위젯
+// 텍스트 필드 생성
 Widget _buildTextField(
     {required TextEditingController controller,
     required String labelText,
@@ -94,34 +112,8 @@ Widget renderLoginText() {
   );
 }
 
-// 로그인 버튼. 누르면 로그인 실시. API 완성되면 추가할 것.
-Widget loginBtn(BuildContext context) {
-  return ElevatedButton(
-    onPressed: () {
-      if (_loginKey.currentState!.validate()) {
-        login();
-      }
-    },
-    child: Text('로그인'),
-  );
-}
-
-Widget signUpBtn(BuildContext context) {
-  return ElevatedButton(
-    onPressed: () => _navigateToSignUpPage(context),
-    child: SignUpBtn(),
-  );
-}
-
-void _navigateToSignUpPage(BuildContext context) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => SignUpPage()),
-  );
-}
-
-void login() {
-  String username = _userId.text;
-  String password = _userPw.text;
+void login(BuildContext context) {
+  String userId = _userId.text;
+  String userPwd = _userPw.text;
   print('로그인 시도');
 }

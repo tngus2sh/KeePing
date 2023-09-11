@@ -35,10 +35,12 @@ class ConfirmBtn extends StatelessWidget {
 }
 
 // 버튼 스타일
-ButtonStyle confirmBtnStyle (Color bgColor, Color textColor) {
+ButtonStyle confirmBtnStyle(Color bgColor, Color textColor) {
   return ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(bgColor),
-    textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(fontSize: 18, color: textColor)),
+    foregroundColor: MaterialStateProperty.all<Color>(textColor),
+    textStyle: MaterialStateProperty.all<TextStyle>(
+        TextStyle(fontSize: 18, color: textColor)),
     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30.0), // 테두리 둥글기 반지름 설정

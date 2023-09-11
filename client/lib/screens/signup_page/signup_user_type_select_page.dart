@@ -19,6 +19,7 @@ class SignUpPage extends StatelessWidget {
             icon: Icon(Icons.arrow_circle_up),
             path: SignUpPage(),
           ),
+          selectText(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center, // 가운데 정렬 추가
             children: [typeKidBtn(context), typeParentBtn(context)],
