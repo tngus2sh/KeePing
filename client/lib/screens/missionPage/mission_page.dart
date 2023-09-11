@@ -4,6 +4,7 @@ import 'package:keeping/screens/missionPage/widgets/mission_box.dart';
 import 'widgets/filtering_bar.dart';
 import '../../util/axios_test.dart';
 import 'package:keeping/widgets/header.dart';
+import 'package:keeping/util/camera_test.dart';
 
 //전역변수들
 final List<Map<String, dynamic>> missions = [
@@ -126,5 +127,16 @@ Widget axiosButton(BuildContext context) {
           context, MaterialPageRoute(builder: (context) => AxiosTest()));
     },
     child: const Text('axiosText!!'),
+  );
+}
+
+//Camera 테스트로 이동하는 버튼
+Widget cameraButton(BuildContext context) {
+  return ElevatedButton(
+    onPressed: () {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => CameraTest()));
+    },
+    child: const Text('came!!'),
   );
 }

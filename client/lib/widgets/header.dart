@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// 상단 헤더 클래스
+// body에 들어가는 상단 헤더 클래스
 class MyHeader extends StatelessWidget {
   final String text;
   final Color bgColor;
@@ -18,35 +18,65 @@ class MyHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    final double statusBarSize = MediaQuery.of(context).padding.top; // 상태표시줄 높이
+
     return Container(
-      color: bgColor,
-      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back),
-          color: elementColor,
-          iconSize: 40.0,
-        ),
-        Text(
-          text,
-          style: TextStyle(
-            color: elementColor,
-            fontSize: 25.0,
-          ),
-        ),
-        if (icon != null && path != null)
-          IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) => path!));
-            },
-            icon: icon!,
-            color: elementColor,
-            iconSize: 40.0,
-          )
-      ]),
-    );
+        color: bgColor,
+        child: Column(
+          children: [
+            SizedBox(
+              height: statusBarSize + 5,
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              backBtn(context, elementColor),
+              titleText(context, elementColor, text),
+              (icon != null &&
+                      path != null) // 오른쪽 아이콘이 없을 경우 SizedBox를 추가해 정렬에 문제없도록 처리
+                  ? extraBtn(context, elementColor, icon!, path!)
+                  : SizedBox(
+                      width: 55,
+                    )
+            ]),
+            SizedBox(
+              height: 5,
+            )
+          ],
+        ));
   }
+}
+
+// 뒤로 돌아가는 화살표 버튼
+Widget backBtn(BuildContext context, Color elementColor) {
+  return IconButton(
+    onPressed: () {
+      Navigator.pop(context);
+    },
+    icon: Icon(Icons.arrow_back),
+    color: elementColor,
+    iconSize: 40.0,
+  );
+}
+
+// 타이틀
+Widget titleText(BuildContext context, Color elementColor, String text) {
+  return Text(
+    text,
+    style: TextStyle(
+      color: elementColor,
+      fontSize: 25.0,
+    ),
+  );
+}
+
+// 있을수도 없을수도 있는 추가 버튼
+Widget extraBtn(
+    BuildContext context, Color elementColor, Widget icon, Widget path) {
+  return IconButton(
+    onPressed: () {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => path));
+    },
+    icon: icon,
+    color: elementColor,
+    iconSize: 40.0,
+  );
 }

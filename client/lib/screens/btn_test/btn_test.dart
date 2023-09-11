@@ -18,7 +18,12 @@ class BtnTest extends StatelessWidget {
       ),
       bottomNavigationBar: BottomBtn(
         text: '다음',
+        onPressed: onPressed,
       )
     );
   }
+}
+
+void onPressed(BuildContext context) {
+  Navigator.pop(context);
 }
