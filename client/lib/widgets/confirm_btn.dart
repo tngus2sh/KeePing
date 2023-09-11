@@ -5,26 +5,28 @@ class ConfirmBtn extends StatelessWidget {
   final String text;
   final Color bgColor;
   final Color textColor;
-  final Widget? path;  // 버튼 클릭 후 이동할 곳. 비어있으면 이전 페이지로 이동
+  final dynamic action;
+  // final Widget? path;  // 버튼 클릭 후 이동할 곳. 비어있으면 이전 페이지로 이동
 
   ConfirmBtn({
     super.key,
     this.text = '확인',
     this.bgColor = const Color(0xFF8320E7),
     this.textColor = Colors.white,
-    this.path
+    this.action,
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        path != null ? (
-          Navigator.push(
-            context, MaterialPageRoute(builder: (_) => path!))
-        ) : (
-          Navigator.pop(context)
-        );
+        if (action == null) {
+          Navigator.pop(context);
+        } else if (action is Widget) {
+          Navigator.push(context, MaterialPageRoute(builder: (_) => action));
+        } else {
+          action(context);
+        }
       },
       style: confirmBtnStyle(bgColor, textColor),
       child: Text(text),

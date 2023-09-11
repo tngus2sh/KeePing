@@ -74,6 +74,7 @@ Widget _buildTextField({
         obscureText: obscureText,
         decoration: InputDecoration(labelText: labelText, hintText: hintText),
         validator: validator,
+        textInputAction: TextInputAction.next,
         autovalidateMode: AutovalidateMode.always,
       ),
       SizedBox(

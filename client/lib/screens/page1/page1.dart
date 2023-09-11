@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:keeping/widgets/bottom_nav.dart';
-import 'package:keeping/screens/btn_test/btn_test.dart';
+import 'package:keeping/screens/map_test/map_test.dart';
 import 'package:keeping/screens/page3/page3.dart';
 import 'package:keeping/widgets/bottom_modal.dart';
 import 'package:keeping/widgets/confirm_btn.dart';
 import 'package:keeping/widgets/floating_btn.dart';
 import 'package:keeping/widgets/header.dart';
+import 'package:keeping/widgets/bottom_nav.dart';
 
 class Page1 extends StatelessWidget {
   const Page1({super.key});
@@ -21,14 +21,14 @@ class Page1 extends StatelessWidget {
               icon: Icon(Icons.arrow_circle_up),
               path: Page1(),
             ),
-            ConfirmBtn(text: '확인', path: BtnTest()),
+            ConfirmBtn(text: '확인확인', action: Page3()),
             testBtn(context),
           ],
         ),
         floatingActionButton: FloatingBtn(
-          text: '페이지3',
-          icon: Icon(Icons.animation),
-          path: Page3(),
+          text: '소비지도',
+          icon: Icon(Icons.map),
+          path: MapTest(),
         ),
         bottomNavigationBar: BottomNav());
   }
