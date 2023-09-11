@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:keeping/screens/page1/page1.dart';
-import 'package:keeping/widgets/floating_btn.dart';
+import 'package:keeping/screens/child_spending_route_page/widgets/floating_date_btn.dart';
 import 'package:keeping/widgets/header.dart';
 
 class ChildSpendingRoutePage extends StatefulWidget {
@@ -88,34 +87,7 @@ class _ChildSpendingRoutePageState extends State<ChildSpendingRoutePage> {
                 jointType: JointType.round
               )}
             ),
-            Positioned(
-              top: 20,
-              child: Container(
-                width: 170,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5), // 그림자 색상
-                      spreadRadius: 2, // 그림자 전파 반경
-                      blurRadius: 5, // 그림자 흐림 반경
-                      offset: Offset(0, 2), // 그림자의 X, Y 오프셋
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    Icon(Icons.arrow_left, size: 35),
-                    Text('12월 23일', style: TextStyle(fontSize: 20)),
-                    Icon(Icons.arrow_right, size: 35,),
-                  ],
-                ),
-              ),
-            )
+            FloatingDateBtn()  // 커스텀 위젯
           ],
         )
       ),
