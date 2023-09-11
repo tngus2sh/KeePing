@@ -14,7 +14,6 @@ class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
         body: Column(
           children: [
             MyHeader(
@@ -23,34 +22,16 @@ class Page1 extends StatelessWidget {
               icon: Icon(Icons.arrow_circle_up),
               path: Page1(),
             ),
-            ConfirmBtn(
-              text: '확인',
-              path: BtnTest(),
-            )
+            ConfirmBtn(text: '확인', path: BtnTest()),
+            testBtn(context),
           ],
         ),
+        floatingActionButton: FloatingBtn(
+          text: '페이지3',
+          icon: Icon(Icons.animation),
+          path: Page3(),
+        ),
         bottomNavigationBar: BottomNav());
-=======
-      body: Column(
-        children: [
-          MyHeader(
-            text: '제목',
-            elementColor: Colors.black,
-            icon: Icon(Icons.arrow_circle_up),
-            path: Page1(),
-          ),
-          ConfirmBtn(text: '확인', path: BtnTest()),
-          testBtn(context),
-        ],
-      ),
-      floatingActionButton: FloatingBtn(
-        text: '페이지3', 
-        icon: Icon(Icons.animation),
-        path: Page3(),
-      ),
-      bottomNavigationBar: BottomNav()
-    );
->>>>>>> 3c1e4d65231a1f8db82c662d67e7f02972207606
   }
 }
 
@@ -59,15 +40,14 @@ Widget testBtn(BuildContext context) {
   return ElevatedButton(
     onPressed: () {
       showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return BottomModal(
-            title: '안녕',
-            content: testContent(context),
-            button: ConfirmBtn(),
-          );
-        }
-      );
+          context: context,
+          builder: (BuildContext context) {
+            return BottomModal(
+              title: '안녕',
+              content: testContent(context),
+              button: ConfirmBtn(),
+            );
+          });
     },
     child: const Text('모달'),
   );
@@ -77,10 +57,7 @@ Widget testBtn(BuildContext context) {
 Widget testContent(BuildContext context) {
   return Center(
     child: Column(
-      children: [
-        Text('모달에 넣고싶은 내용(위젯들) 넣기'),
-        Icon(Icons.heart_broken)
-      ],
+      children: [Text('모달에 넣고싶은 내용(위젯들) 넣기'), Icon(Icons.heart_broken)],
     ),
   );
 }

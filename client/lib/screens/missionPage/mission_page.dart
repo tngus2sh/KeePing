@@ -131,12 +131,12 @@ Widget axiosButton(BuildContext context) {
 }
 
 //Camera 테스트로 이동하는 버튼
-Widget cameraButton(BuildContext context) {
-  return ElevatedButton(
-    onPressed: () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => CameraTest()));
-    },
-    child: const Text('came!!'),
-  );
-}
+// Widget cameraButton(BuildContext context) {
+//   return ElevatedButton(
+//     onPressed: () {
+//       Navigator.push(
+//           context, MaterialPageRoute(builder: (context) => CameraTest()));
+//     },
+//     child: const Text('came!!'),
+//   );
+// }
