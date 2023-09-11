@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 
+import 'package:gallery_saver/gallery_saver.dart';
+import 'package:image_picker/image_picker.dart';
+
 // 전역변수
 late String image64;
 String parsedtext = '';
@@ -106,18 +109,9 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
             // 사진을 찍고 파일 'image'에 저장합니다.
             final image = await _controller.takePicture();
-            print(image);
-            // base64 형식으로 변환하기
-
-            var bytes = File(image.path).readAsBytesSync();
-
-            image64 = base64Encode(bytes);
-
+            _takePhoto();
             if (!mounted) return;
 
-            // OCR 결과를 얻기 위해 _getFromCamera 함수를 호출합니다.
-            await _getFromCamera(); // OCR 함수 호출
-            print(parsedtext);
             // 사진이 찍힌 경우, 새로운 화면에 이미지를 표시합니다.
             await Navigator.of(context).push(
               MaterialPageRoute(
@@ -135,24 +129,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
         child: const Icon(Icons.camera_alt),
       ),
     );
-  }
-
-  _getFromCamera() async {
-    var url = 'https://api.ocr.space/parse/image';
-    var payload = {
-      "base64Image": "data:image/jpg;base64,${image64.toString()}",
-      "language": "kor"
-    };
-    var header = {"apikey": "K87454900488957"};
-
-    var post = await http.post(Uri.parse(url), body: payload, headers: header);
-
-    var result = jsonDecode(post.body);
-    print(result);
-    setState(() {
-      // parsedtext = result['ParsedResults'][0]['ParsedText'];
-      parsedtext = result['ParsedResults'][0]['ParsedText'];
-    });
   }
 }
 
@@ -175,9 +151,20 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
       body: Column(
         children: [
           Image.file(File(widget.imagePath)),
-          Text(parsedtext), // OCR 결과를 표시
         ],
       ),
     );
   }
+}
+
+void _takePhoto() async {
+  ImagePicker().pickImage(source: ImageSource.camera).then((value) {
+    if (value != null && value.path != null) {
+      print("저장경로 : ${value.path}");
+
+      GallerySaver.saveImage(value.path).then((value) {
+        print("사진이 저장되었습니다");
+      });
+    }
+  });
 }

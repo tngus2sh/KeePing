@@ -7,8 +7,9 @@ import 'package:keeping/widgets/header.dart';
 
 import 'dart:async';
 import 'dart:io';
-import 'package:keeping/util/camera_test.dart';
+import 'package:keeping/util/camera_test2.dart';
 import 'package:camera/camera.dart';
+import 'package:keeping/util/ocr_test.dart';
 
 //전역변수들
 // 전역변수로 firstCamera를 선언
@@ -110,6 +111,7 @@ class _MissonPageState extends State<MissionPage> {
         missionBoxs(),
         axiosButton(context),
         cameraButton(context),
+        ocrButton(context),
       ],
     )));
   }
@@ -149,12 +151,29 @@ Widget cameraButton(BuildContext context) {
         ),
       );
     },
-    child: const Text('cameraTest!!!!'),
+    child: const Text('cameraTest?'),
   );
 }
 
+//비동기 요청으로 시스템의 카메라를 가져오는 함수
 Future<void> cameraCall() async {
   WidgetsFlutterBinding.ensureInitialized();
   final cameras = await availableCameras();
   firstCamera = cameras.first;
+}
+
+// ocr test로 이동하는 버튼
+Widget ocrButton(BuildContext context) {
+  return ElevatedButton(
+    onPressed: () async {
+      await cameraCall(); // Camera 초기화 함수 호출
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => OcrTest(),
+        ),
+      );
+    },
+    child: const Text('ocrTest?'),
+  );
 }
