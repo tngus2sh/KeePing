@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:keeping/widget/header.dart';
+import 'package:keeping/widgets/header.dart';
 import 'widgets/select_kid_btn.dart';
 import 'widgets/select_parent_btn.dart';
 import 'signup_kid_page.dart';
@@ -19,9 +19,6 @@ class SignUpPage extends StatelessWidget {
             icon: Icon(Icons.arrow_circle_up),
             path: SignUpPage(),
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            selectText(),
-          ]),
           Row(
             mainAxisAlignment: MainAxisAlignment.center, // 가운데 정렬 추가
             children: [typeKidBtn(context), typeParentBtn(context)],
