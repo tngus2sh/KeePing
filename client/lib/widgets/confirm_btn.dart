@@ -38,6 +38,7 @@ class ConfirmBtn extends StatelessWidget {
 ButtonStyle confirmBtnStyle (Color bgColor, Color textColor) {
   return ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(bgColor),
+    foregroundColor: MaterialStateProperty.all<Color>(textColor),
     textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(fontSize: 18, color: textColor)),
     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
       RoundedRectangleBorder(

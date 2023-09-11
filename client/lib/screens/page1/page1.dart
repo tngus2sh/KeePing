@@ -23,7 +23,8 @@ class Page1 extends StatelessWidget {
           ),
           ConfirmBtn(
             text: '확인확인', 
-            action: Page3()
+            action: Page3(),
+            textColor: Colors.yellow,
           ),
           testBtn(context),
         ],
