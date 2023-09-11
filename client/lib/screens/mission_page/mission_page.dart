@@ -4,9 +4,15 @@ import 'package:keeping/screens/mission_page/widgets/mission_box.dart';
 import 'widgets/filtering_bar.dart';
 import '../../util/axios_test.dart';
 import 'package:keeping/widgets/header.dart';
+
+import 'dart:async';
+import 'dart:io';
 import 'package:keeping/util/camera_test.dart';
+import 'package:camera/camera.dart';
 
 //전역변수들
+// 전역변수로 firstCamera를 선언
+late CameraDescription firstCamera;
 final List<Map<String, dynamic>> missions = [
   {
     "id": 23,
@@ -102,7 +108,8 @@ class _MissonPageState extends State<MissionPage> {
         CreateMissonBox(),
         FilteringBar(),
         missionBoxs(),
-        axiosButton(context)
+        axiosButton(context),
+        cameraButton(context),
       ],
     )));
   }
@@ -119,24 +126,35 @@ Widget missionBoxs() {
           }));
 }
 
-//Axios 테스트로 이동하는 버튼
+// //Axios 테스트로 이동하는 버튼
 Widget axiosButton(BuildContext context) {
   return ElevatedButton(
     onPressed: () {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => AxiosTest()));
     },
-    child: const Text('axiosText!!'),
+    child: const Text('axiosTest!!!'),
   );
 }
 
-//Camera 테스트로 이동하는 버튼
-// Widget cameraButton(BuildContext context) {
-//   return ElevatedButton(
-//     onPressed: () {
-//       Navigator.push(
-//           context, MaterialPageRoute(builder: (context) => CameraTest()));
-//     },
-//     child: const Text('came!!'),
-//   );
-// }
+// Camera 테스트로 이동하는 버튼
+Widget cameraButton(BuildContext context) {
+  return ElevatedButton(
+    onPressed: () async {
+      await cameraCall(); // Camera 초기화 함수 호출
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CameraTest(camera: firstCamera),
+        ),
+      );
+    },
+    child: const Text('cameraTest!!!!'),
+  );
+}
+
+Future<void> cameraCall() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final cameras = await availableCameras();
+  firstCamera = cameras.first;
+}
