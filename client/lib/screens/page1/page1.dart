@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:keeping/screens/map_test/map_test.dart';
+import 'package:keeping/screens/child_spending_route_page/child_spending_route_page.dart';
 import 'package:keeping/screens/page3/page3.dart';
 import 'package:keeping/widgets/bottom_modal.dart';
 import 'package:keeping/widgets/bottom_nav.dart';
@@ -32,7 +32,7 @@ class Page1 extends StatelessWidget {
       floatingActionButton: FloatingBtn(
         text: '소비지도', 
         icon: Icon(Icons.map),
-        path: MapTest(),
+        path: ChildSpendingRoutePage(),
       ),
       bottomNavigationBar: BottomNav()
     );
