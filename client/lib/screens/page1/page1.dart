@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:keeping/screens/btn_test/btn_test.dart';
-import 'package:keeping/screens/page3/page3.dart';
+import 'package:keeping/screens/map_test/map_test.dart';
 import 'package:keeping/widgets/bottom_modal.dart';
 import 'package:keeping/widgets/bottom_nav.dart';
 import 'package:keeping/widgets/confirm_btn.dart';
@@ -26,9 +26,9 @@ class Page1 extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingBtn(
-        text: '페이지3', 
-        icon: Icon(Icons.animation),
-        path: Page3(),
+        text: '소비지도', 
+        icon: Icon(Icons.map),
+        path: MapTest(),
       ),
       bottomNavigationBar: BottomNav()
     );
