@@ -5,14 +5,14 @@ class BottomBtn extends StatelessWidget {
   final String text;
   final Color bgColor;
   final Color textColor;
-  final void Function(BuildContext) onPressed;  // 버튼 클릭 후 실행될 함수
+  final dynamic action;
 
   BottomBtn({
     super.key,
     required this.text,
     this.bgColor = const Color(0xFF8320E7),
     this.textColor = Colors.white,
-    required this.onPressed
+   this.action,
   });
 
   // 특정 페이지로 가던지, 데이터를 보내던지, 이전 페이지로 돌아가던지 구분해서 로직 짜기
@@ -24,7 +24,13 @@ class BottomBtn extends StatelessWidget {
       height: 70.0,
       child: TextButton(
         onPressed: () {
-          onPressed(context);
+          if (action == null) {
+            Navigator.pop(context);
+          } else if (action is Widget) {
+            Navigator.push(context, MaterialPageRoute(builder: (_) => action));
+          } else {
+            action(context);
+          }
         },
         style: bottomBtnStyle(textColor),
         child: Text(text),
