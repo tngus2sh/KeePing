@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:keeping/widgets/header.dart';
 import 'package:keeping/widgets/bottom_btn.dart';
+import 'package:keeping/screens/signup_page/widgets/signup_nickname_dupli.dart';
 
 TextEditingController _userId = TextEditingController();
 TextEditingController _userPw = TextEditingController();
@@ -9,7 +10,7 @@ TextEditingController _userName = TextEditingController();
 TextEditingController _userBirth = TextEditingController();
 TextEditingController _userPhoneNumber = TextEditingController();
 // 폼의 상태 관리
-final _formKey = GlobalKey<FormState>();
+final _signupKey = GlobalKey<FormState>();
 
 class SignUpParentPage extends StatefulWidget {
   const SignUpParentPage({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class _SignUpParentPageState extends State<SignUpParentPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
-          key: _formKey,
+          key: _signupKey,
           child: Column(
             children: [
               MyHeader(
@@ -48,7 +49,7 @@ class _SignUpParentPageState extends State<SignUpParentPage> {
         text: '회원가입부모',
         onPressed: (BuildContext context) {
           //유효성 검사 전부 통과하면 회원가입
-          if (_formKey.currentState!.validate()) {
+          if (_signupKey.currentState!.validate()) {
             signUp();
           }
         },
@@ -109,6 +110,11 @@ Widget renderSignupText() {
             }
             return null;
           }),
+      NicknameDuplicateButton(
+        onPressed: () {
+          checkNicknameDup(_userId.text);
+        },
+      ),
       _buildTextField(
           controller: _userPwCk,
           labelText: '비밀번호확인',
@@ -152,6 +158,11 @@ Widget renderSignupText() {
           }),
     ],
   );
+}
+
+//닉네임 중복 체크
+void checkNicknameDup(String userId) {
+  print('$userId 닉네임 중복 체크합시다!');
 }
 
 // 버튼을 누르면 실행되는 signup
