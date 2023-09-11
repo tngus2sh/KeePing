@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:keeping/screens/btn_test/btn_test.dart';
 import 'package:keeping/screens/map_test/map_test.dart';
+import 'package:keeping/screens/page3/page3.dart';
 import 'package:keeping/widgets/bottom_modal.dart';
 import 'package:keeping/widgets/bottom_nav.dart';
 import 'package:keeping/widgets/confirm_btn.dart';
@@ -21,7 +21,10 @@ class Page1 extends StatelessWidget {
             icon: Icon(Icons.arrow_circle_up),
             path: Page1(),
           ),
-          ConfirmBtn(text: '확인', path: BtnTest()),
+          ConfirmBtn(
+            text: '확인확인', 
+            action: Page3()
+          ),
           testBtn(context),
         ],
       ),
@@ -64,4 +67,8 @@ Widget testContent(BuildContext context) {
       ],
     ),
   );
+}
+
+void onPressed(BuildContext context) {
+  Navigator.pop(context);
 }
