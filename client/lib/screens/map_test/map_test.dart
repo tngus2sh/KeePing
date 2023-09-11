@@ -22,13 +22,10 @@ class _MapTestState extends State<MapTest> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size(double.infinity, 70),
-          child: MyHeader(
-            text: '소비경로',
-            bgColor: Colors.purple,
-            elementColor: Colors.white,
-          ),
+        appBar: MyHeader(
+          text: '소비경로',
+          bgColor: Colors.purple,
+          elementColor: Colors.white,
         ),
         body: GoogleMap(
           onMapCreated: _onMapCreated,
