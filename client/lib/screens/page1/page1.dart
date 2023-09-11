@@ -3,7 +3,6 @@ import 'package:keeping/widgets/bottom_nav.dart';
 import 'package:keeping/screens/btn_test/btn_test.dart';
 import 'package:keeping/screens/page3/page3.dart';
 import 'package:keeping/widgets/bottom_modal.dart';
-import 'package:keeping/widgets/bottom_nav.dart';
 import 'package:keeping/widgets/confirm_btn.dart';
 import 'package:keeping/widgets/floating_btn.dart';
 import 'package:keeping/widgets/header.dart';

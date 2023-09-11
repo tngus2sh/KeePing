@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:keeping/screens/missionPage/mission_page.dart';
+import 'package:keeping/screens/mission_page/mission_page.dart';
 import 'package:keeping/widgets/header.dart';
 
 class MissionDetailPage extends StatefulWidget {

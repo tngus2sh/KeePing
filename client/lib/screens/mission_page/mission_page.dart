@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'widgets/create_misson_box.dart';
-import 'package:keeping/screens/missionPage/widgets/mission_box.dart';
+import 'package:keeping/screens/mission_page/widgets/mission_box.dart';
 import 'widgets/filtering_bar.dart';
 import '../../util/axios_test.dart';
 import 'package:keeping/widgets/header.dart';

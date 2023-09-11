@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:keeping/screens/missionDetailPage/mission_detail_page.dart';
+import 'package:keeping/screens/mission_detail_page/mission_detail_page.dart';
 
 // 미션박스 클래스
 class MissionBox extends StatefulWidget {
