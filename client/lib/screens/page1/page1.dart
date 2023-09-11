@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:keeping/widgets/bottom_nav.dart';
 import 'package:keeping/screens/btn_test/btn_test.dart';
+import 'package:keeping/screens/page3/page3.dart';
 import 'package:keeping/widgets/bottom_modal.dart';
 import 'package:keeping/widgets/confirm_btn.dart';
+import 'package:keeping/widgets/floating_btn.dart';
 import 'package:keeping/widgets/header.dart';
 
 class Page1 extends StatelessWidget {
@@ -19,11 +21,14 @@ class Page1 extends StatelessWidget {
               icon: Icon(Icons.arrow_circle_up),
               path: Page1(),
             ),
-            ConfirmBtn(
-              text: '확인',
-              path: BtnTest(),
-            )
+            ConfirmBtn(text: '확인', path: BtnTest()),
+            testBtn(context),
           ],
+        ),
+        floatingActionButton: FloatingBtn(
+          text: '페이지3',
+          icon: Icon(Icons.animation),
+          path: Page3(),
         ),
         bottomNavigationBar: BottomNav());
   }

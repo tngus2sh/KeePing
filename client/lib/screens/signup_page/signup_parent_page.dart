@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:keeping/widgets/header.dart';
-import 'package:keeping/screens/signup_page/widgets/signup_parent_btn.dart';
+import 'package:keeping/widgets/bottom_btn.dart';
 
 TextEditingController _userId = TextEditingController();
 TextEditingController _userPw = TextEditingController();
@@ -33,25 +33,23 @@ class _SignUpParentPageState extends State<SignUpParentPage> {
               padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [Test()],
+                children: [renderSignupText()],
               ),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: SignupParentBtn(
-        text: '회원가입',
-        // userId = _userId.text;
-        // onPressed: () {
-        //   signUp;
-        //   // String parentPhoneNumber = _parentPhoneNumber.text;
-        //   // 회원가입 로직이 들어갈 예정
-        // },
+      bottomNavigationBar: BottomBtn(
+        text: '회원가입부모',
+        onPressed: (BuildContext context) {
+          signUp();
+        },
       ),
     );
   }
 }
 
+// 아래에서 호출한 요소들로 필드 만들기
 Widget _buildTextField(
     {required TextEditingController controller,
     required String labelText,
@@ -73,7 +71,8 @@ Widget _buildTextField(
   );
 }
 
-Widget Test() {
+// 회원가입에 필요한 요소들 호출
+Widget renderSignupText() {
   return Column(
     children: [
       _buildTextField(
@@ -115,7 +114,9 @@ Widget Test() {
   );
 }
 
+// 버튼을 누르면 실행되는 signup
 void signUp() {
+  print('회원가입 함수까지 옵니다.');
   String userId = _userId.text;
   String userPw = _userPw.text;
   String userPwCk = _userPwCk.text;

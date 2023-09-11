@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:keeping/widgets/bottom_btn.dart';
 import 'package:keeping/widgets/header.dart';
-import 'package:keeping/screens/signup_page/widgets/signup_kid_btn.dart';
 
 TextEditingController _userId = TextEditingController();
 TextEditingController _userPw = TextEditingController();
@@ -40,24 +40,18 @@ class _SignUpKidPageState extends State<SignUpKidPage> {
           ],
         ),
       ),
-      bottomNavigationBar: SignupKidBtn(
+      bottomNavigationBar: BottomBtn(
         text: '회원가입자녀',
-        // onPressed: () {
-        //   String userId = _userId.text;
-        //   String userPw = _userPw.text;
-        //   String userPwCk = _userPwCk.text;
-        //   String userName = _userName.text;
-        //   String userBirth = _userBirth.text;
-        //   String userPhoneNumber = _userPhoneNumber.text;
-        //   String parentPhoneNumber = _parentPhoneNumber.text;
-        //   // 회원가입 로직이 들어갈 예정
-        // },
+        onPressed: (BuildContext context) {
+          signUp();
+        },
       ),
     );
     // );
   }
 }
 
+// 아래에서 호출한 요소들로 필드 만들기
 Widget _buildTextField(
     {required TextEditingController controller,
     required String labelText,
@@ -79,6 +73,7 @@ Widget _buildTextField(
   );
 }
 
+// 회원가입에 필요한 요소들 호출
 Widget renderSignupText() {
   return Column(
     children: [
@@ -120,8 +115,14 @@ Widget renderSignupText() {
   );
 }
 
-void main() {
-  runApp(MaterialApp(
-    home: SignUpKidPage(),
-  ));
+// 버튼을 누르면 실행되는 signup
+void signUp() {
+  print('회원가입 함수까지 옵니다.');
+  String userId = _userId.text;
+  String userPw = _userPw.text;
+  String userPwCk = _userPwCk.text;
+  String userName = _userName.text;
+  String userBirth = _userBirth.text;
+  String userPhoneNumber = _userPhoneNumber.text;
+  String parentPhoneNumber = _parentPhoneNumber.text;
 }
