@@ -38,6 +38,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Long addAccount(String memberKey, AddAccountDto dto) throws JsonProcessingException {
+        String key = "AccountAuth_" + memberKey;
+
+        if(redisUtils.getRedisValue(key, String.class) == null) {
+            throw new NoAuthorizationException("401", HttpStatus.UNAUTHORIZED, "핸드폰 번호가 인증되지 않았습니다.");
+        }
+
         String accountNumber = createNewAccountNumber();
 
         Account account = Account.toAccount(memberKey, accountNumber, passwordEncoder.encode(dto.getAuthPassword()), 0l, true);
@@ -65,7 +71,10 @@ public class AccountServiceImpl implements AccountService {
         String key = "AccountPhoneCheck_" + memberKey;
         String value = redisUtils.getRedisValue(key, String.class);
 
-        if(value == null || !value.equals(dto.getCode())) {
+        if(value == null) {
+            throw new NoAuthorizationException("401", HttpStatus.UNAUTHORIZED, "인증번호가 전송되지 않았습니다.");
+        }
+        else if(!value.equals(dto.getCode())) {
             throw new NoAuthorizationException("401", HttpStatus.UNAUTHORIZED, "인증번호가 일치하지 않습니다.");
         }
 
