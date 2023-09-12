@@ -2,9 +2,12 @@ package com.keeping.memberservice.api.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.keeping.memberservice.api.ApiResponse;
+import com.keeping.memberservice.api.controller.request.JoinParentRequest;
 import com.keeping.memberservice.api.controller.request.SmsCheckRequest;
 import com.keeping.memberservice.api.controller.request.SmsRequest;
 import com.keeping.memberservice.api.service.AuthService;
+import com.keeping.memberservice.api.service.member.MemberService;
+import com.keeping.memberservice.api.service.member.dto.AddMemberDto;
 import com.keeping.memberservice.api.service.sms.SmsService;
 import com.keeping.memberservice.api.service.sms.dto.MessageDto;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +32,18 @@ public class MemberController {
 
     private final AuthService authService;
     private final SmsService smsService;
+    private final MemberService memberService;
+
+    @PostMapping("/join/parent")
+    public ApiResponse<String> joinParent(@RequestBody @Valid JoinParentRequest request) {
+        log.debug("[멤버 회원가입-Controller]");
+
+        AddMemberDto dto = createAddMemberDto(request);
+
+        String result = memberService.addParent(dto);
+
+        return ApiResponse.ok(result);
+    }
 
     @PostMapping("/phone-check")
     public ApiResponse<String> checkJoinSms(@RequestBody @Valid SmsCheckRequest request) throws UnsupportedEncodingException, NoSuchAlgorithmException, URISyntaxException, InvalidKeyException, JsonProcessingException {
@@ -52,7 +67,7 @@ public class MemberController {
 
         MessageDto message = MessageDto.builder()
                 .to(phone)
-                // TODO: 2023-09-12 예리 - 인증번호 문자 다듬기 
+                // TODO: 2023-09-12 예리 - 인증번호 문자 다듬기
                 .content(randomNumber)
                 .build();
 
@@ -66,5 +81,12 @@ public class MemberController {
         return phone[0] + phone[1] + phone[2];
     }
 
-
+    private AddMemberDto createAddMemberDto(JoinParentRequest request) {
+        return AddMemberDto.builder()
+                .loginId(request.getLoginId())
+                .loginPw(request.getLoginPw())
+                .name(request.getName())
+                .phone(request.getPhone())
+                .birth(request.getBirth()).build();
+    }
 }

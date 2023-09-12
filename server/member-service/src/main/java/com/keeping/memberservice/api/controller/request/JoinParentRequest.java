@@ -29,12 +29,12 @@ public class JoinParentRequest {
     @Size(max = 13, min = 13)
     @Pattern(regexp = "^\\d{3}-\\d{3,4}-\\d{4}$")
     private String phone;
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime birth;
+    @NotBlank
+    @Size(min = 10, max = 10)
+    private String birth;
 
     @Builder
-    private JoinParentRequest(String loginId, String loginPw, String name, String phone, LocalDateTime birth) {
+    private JoinParentRequest(String loginId, String loginPw, String name, String phone, String birth) {
         this.loginId = loginId;
         this.loginPw = loginPw;
         this.name = name;

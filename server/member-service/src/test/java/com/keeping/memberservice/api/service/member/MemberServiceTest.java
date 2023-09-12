@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.keeping.memberservice.IntegrationTestSupport;
 import com.keeping.memberservice.api.service.AuthService;
 import com.keeping.memberservice.api.service.member.dto.AddMemberDto;
-import com.keeping.memberservice.api.service.sms.SmsService;
 import com.keeping.memberservice.domain.Member;
 import com.keeping.memberservice.domain.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -48,7 +47,7 @@ class MemberServiceTest extends IntegrationTestSupport {
     @Test
     void addParentPhoneError() {
         //given
-        AddMemberDto dto = createAddMemberDto("keep");
+        AddMemberDto dto = createAddMemberDto("keeping");
 
         //when
         //then
