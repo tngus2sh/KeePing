@@ -5,15 +5,10 @@ import 'widgets/filtering_bar.dart';
 import '../../util/axios_test.dart';
 import 'package:keeping/widgets/header.dart';
 
-import 'dart:async';
-import 'dart:io';
 import 'package:keeping/util/camera_test2.dart';
-import 'package:camera/camera.dart';
 import 'package:keeping/util/ocr_test.dart';
 
 //전역변수들
-// 전역변수로 firstCamera를 선언
-late CameraDescription firstCamera;
 final List<Map<String, dynamic>> missions = [
   {
     "id": 23,
@@ -143,11 +138,10 @@ Widget axiosButton(BuildContext context) {
 Widget cameraButton(BuildContext context) {
   return ElevatedButton(
     onPressed: () async {
-      await cameraCall(); // Camera 초기화 함수 호출
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => CameraTest(camera: firstCamera),
+          builder: (context) => CameraTest(),
         ),
       );
     },
@@ -155,18 +149,10 @@ Widget cameraButton(BuildContext context) {
   );
 }
 
-//비동기 요청으로 시스템의 카메라를 가져오는 함수
-Future<void> cameraCall() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  final cameras = await availableCameras();
-  firstCamera = cameras.first;
-}
-
 // ocr test로 이동하는 버튼
 Widget ocrButton(BuildContext context) {
   return ElevatedButton(
     onPressed: () async {
-      await cameraCall(); // Camera 초기화 함수 호출
       Navigator.push(
         context,
         MaterialPageRoute(
