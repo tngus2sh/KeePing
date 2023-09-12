@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:kakao_map_plugin/kakao_map_plugin.dart';
 import 'package:keeping/screens/child_spending_route_page/widgets/floating_date_btn.dart';
 import 'package:keeping/widgets/header.dart';
 
@@ -11,7 +11,6 @@ class ChildSpendingRoutePage extends StatefulWidget {
 }
 
 class _ChildSpendingRoutePageState extends State<ChildSpendingRoutePage> {
-  late GoogleMapController mapController;
 
   // 임시 더미데이터 
   final _places = [
@@ -35,27 +34,18 @@ class _ChildSpendingRoutePageState extends State<ChildSpendingRoutePage> {
     },
   ];
 
-  final _markers = <Marker>{};
-
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
-
   @override
   void initState() {
-    _markers.addAll(
-      _places.map(
-        (e) => Marker(
-          markerId: MarkerId(e['store_name'] as String),
-          infoWindow: InfoWindow(title: e['store_name'] as String),
-          position: LatLng(
-            e['latitude'] as double,
-            e['longitude'] as double,
-          ),
-        ),
-      ),
-    );
     super.initState();
+    _initializeKakaoMap();
+  }
+
+  // 카카오맵 초기화 및 설정
+  void _initializeKakaoMap() async {
+    // await dotenv.load(fileName: 'assets/env/.env');
+    // final appKey = dotenv.env['KAKAO_APP_KEY'] ?? '';
+
+    AuthRepository.initialize(appKey: 'b2768527932bfa91c8d7012e1da2f8bb');
   }
 
   @override
@@ -70,23 +60,7 @@ class _ChildSpendingRoutePageState extends State<ChildSpendingRoutePage> {
         body: Stack(
           alignment: Alignment.topCenter,
           children: [
-            GoogleMap(
-              onMapCreated: _onMapCreated,
-              initialCameraPosition: CameraPosition(
-                target: LatLng(_places.first['latitude'] as double, _places.first['longitude'] as double),
-                zoom: 17.0,
-              ),
-              markers: _markers,
-              polylines: {Polyline(
-                polylineId: PolylineId('9월 1일'),
-                points: _places.map((e) => LatLng(e['latitude'] as double, e['longitude'] as double)).toList(),
-                color: Colors.blue,
-                startCap: Cap.roundCap,
-                endCap: Cap.roundCap,
-                width: 5,
-                jointType: JointType.round
-              )}
-            ),
+            KakaoMap(),
             FloatingDateBtn()  // 커스텀 위젯
           ],
         )
