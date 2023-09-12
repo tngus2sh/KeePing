@@ -7,23 +7,36 @@ class ChildMainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      body: Column(
-        children: [
-          MakeAccountBtn(),
-          Row(
-            children: [
-              Container(),
-              Container()
-            ],
-          ),
-          Row(
-            children: [
-              Container(),
-              Container()
-            ],
-          ),
-          Container()
-        ],
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: const [
+              Color(0xFF1C0038),
+              Color(0xFF401C64)
+            ]
+          )
+        ),
+        child: Column(
+          children: [
+            SizedBox(height: 100,),
+            MakeAccountBtn(),
+            Row(
+              children: [
+                Container(),
+                Container()
+              ],
+            ),
+            Row(
+              children: [
+                Container(),
+                Container()
+              ],
+            ),
+            Container()
+          ],
+        )
       ),
       bottomNavigationBar: BottomNav()
     );
