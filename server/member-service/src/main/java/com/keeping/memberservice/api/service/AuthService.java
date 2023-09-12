@@ -3,6 +3,7 @@ package com.keeping.memberservice.api.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,13 +19,54 @@ public class AuthService {
     private final RedisTemplate<String, String> redisTemplate;
     private static final String CERTIFICATION_REQUEST = "certification_request";
     private static final long CERTIFICATION_NUMBER_EXPIRE = 200;
+    private static final String VERIFIED_NUMBER = "verified_number_";
 
 
+    /**
+     * 번호인증이 되었는지 확인하는 함수
+     *
+     * @param phone 전화번호
+     * @return 인증됨 = true;
+     */
+    public boolean joinUserConfirm(String phone) {
+        ValueOperations<String, String> redisString = redisTemplate.opsForValue();
+
+        String result = redisString.get(VERIFIED_NUMBER + phone);
+        return result != null;
+    }
+
+    /**
+     * 인증번호 검사
+     *
+     * @param phone         전화번호
+     * @param certification 인증번호
+     * @return 인증됨 = true
+     */
+    public boolean checkNumber(String phone, String certification) {
+        ValueOperations<String, String> redisString = redisTemplate.opsForValue();
+
+        String certification_request = CERTIFICATION_REQUEST + phone;
+        String number = redisString.get(certification_request);
+        log.debug("[번호인증] 발급된 번호 = {}, 입력한 번호 ={}", number, certification);
+        if (certification == null || !certification.equals(number)) {
+            return false;
+        }
+
+        redisString.append(VERIFIED_NUMBER + phone, "ok");
+        return true;
+    }
+
+    /**
+     * 인증번호 발급
+     *
+     * @param phone
+     * @return
+     */
     public String getRandomCertification(String phone) {
         String number = createRandomNumCode();
 
         String certification_request = CERTIFICATION_REQUEST + phone;
-        redisTemplate.opsForValue().append(CERTIFICATION_REQUEST + phone, number);
+        redisTemplate.opsForValue().append(certification_request, number);
         redisTemplate.expire(certification_request, CERTIFICATION_NUMBER_EXPIRE, TimeUnit.SECONDS);
 
         return number;
