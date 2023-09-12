@@ -11,6 +11,7 @@ class ChildSpendingRoutePage extends StatefulWidget {
 }
 
 class _ChildSpendingRoutePageState extends State<ChildSpendingRoutePage> {
+  late KakaoMapController mapController;
 
   // 임시 더미데이터 
   final _places = [
@@ -34,18 +35,41 @@ class _ChildSpendingRoutePageState extends State<ChildSpendingRoutePage> {
     },
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    _initializeKakaoMap();
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _initializeKakaoMap();
+  // }
+
+  // // 카카오맵 초기화 및 설정
+  // void _initializeKakaoMap() async {
+  //   await dotenv.load(fileName: 'assets/env/.env');
+  //   final appKey = dotenv.env['KAKAO_APP_KEY'] ?? '';
+
+  //   AuthRepository.initialize(appKey: 'b2768527932bfa91c8d7012e1da2f8bb');
+  // }
+
+  final markers = <Marker>{};
+
+  void _onMapCreated(KakaoMapController controller) {
+    mapController = controller;
   }
 
-  // 카카오맵 초기화 및 설정
-  void _initializeKakaoMap() async {
-    // await dotenv.load(fileName: 'assets/env/.env');
-    // final appKey = dotenv.env['KAKAO_APP_KEY'] ?? '';
-
+  @override
+  void initState() {
     AuthRepository.initialize(appKey: 'b2768527932bfa91c8d7012e1da2f8bb');
+    markers.addAll(
+      _places.map(
+        (e) => Marker(
+          markerId: e['store_name'] as String,
+          latLng: LatLng(
+            e['latitude'] as double,
+            e['longitude'] as double,
+          ),
+        ),
+      ),
+    );
+    super.initState();
   }
 
   @override
@@ -60,7 +84,21 @@ class _ChildSpendingRoutePageState extends State<ChildSpendingRoutePage> {
         body: Stack(
           alignment: Alignment.topCenter,
           children: [
-            KakaoMap(),
+            KakaoMap(
+              onMapCreated: ((controller) async {
+                mapController = controller;
+              }),
+              center: LatLng(_places.first['latitude'] as double, _places.first['longitude'] as double),
+              markers: markers.toList(),
+              polylines: [
+                Polyline(
+                  polylineId: '9월 1일',
+                  points: _places.map((e) => LatLng(e['latitude'] as double, e['longitude'] as double)).toList(),
+                  strokeColor: Colors.blue,
+                  strokeStyle: StrokeStyle.dashDot
+                )
+              ],
+            ),
             FloatingDateBtn()  // 커스텀 위젯
           ],
         )
