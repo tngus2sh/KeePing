@@ -30,7 +30,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^0.13.6
   intl: ^0.18.1
+  # camera: ^0.10.5+4
+  path_provider: ^2.1.1
+  path: ^1.8.3
+  image: ^4.0.17
+  image_picker: ^0.8.4+4
+  gallery_saver: ^2.3.2
+  flutter_image_compress: ^2.0.4
   kakao_map_plugin: ^0.2.1
   flutter_dotenv: ^5.1.0
 

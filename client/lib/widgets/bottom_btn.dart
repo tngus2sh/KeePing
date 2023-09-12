@@ -12,7 +12,7 @@ class BottomBtn extends StatelessWidget {
     required this.text,
     this.bgColor = const Color(0xFF8320E7),
     this.textColor = Colors.white,
-   this.action,
+    this.action,
   });
 
   // 특정 페이지로 가던지, 데이터를 보내던지, 이전 페이지로 돌아가던지 구분해서 로직 짜기
@@ -40,7 +40,7 @@ class BottomBtn extends StatelessWidget {
 }
 
 // 버튼 스타일
-ButtonStyle bottomBtnStyle (Color textColor) {
+ButtonStyle bottomBtnStyle(Color textColor) {
   return ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
     foregroundColor: MaterialStateProperty.all<Color>(textColor),
