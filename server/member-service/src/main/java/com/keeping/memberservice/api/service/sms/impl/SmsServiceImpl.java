@@ -34,13 +34,13 @@ import java.util.List;
 @Transactional
 public class SmsServiceImpl implements SmsService {
 
-    @Value("${naver-cloud-sms.accessKey}")
+    @Value("${sms.accessKey}")
     private String accessKey;
-    @Value("${naver-cloud-sms.secretKey}")
+    @Value("${sms.secretKey}")
     private String secretKey;
-    @Value("${naver-cloud-sms.serviceId}")
+    @Value("${sms.serviceId}")
     private String serviceId;
-    @Value("${naver-cloud-sms.senderPhone}")
+    @Value("${sms.senderPhone}")
     private String phone;
 
 
@@ -48,7 +48,7 @@ public class SmsServiceImpl implements SmsService {
         String space = " ";
         String newLine = "\n";
         String method = "POST";
-        String url = "/sms/v2/services/"+ this.serviceId+"/messages";
+        String url = "/sms/v2/services/" + this.serviceId + "/messages";
         String accessKey = this.accessKey;
         String secretKey = this.secretKey;
 
@@ -99,11 +99,10 @@ public class SmsServiceImpl implements SmsService {
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
-        SmsResponseDto response = restTemplate.postForObject(new URI("https://sens.apigw.ntruss.com/sms/v2/services/"+ serviceId +"/messages"), httpBody, SmsResponseDto.class);
+        SmsResponseDto response = restTemplate.postForObject(new URI("https://sens.apigw.ntruss.com/sms/v2/services/" + serviceId + "/messages"), httpBody, SmsResponseDto.class);
 
         return response;
     }
-
 
 
 }
