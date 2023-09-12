@@ -7,6 +7,7 @@ import 'package:keeping/widgets/header.dart';
 
 import 'package:keeping/util/camera_test2.dart';
 import 'package:keeping/util/ocr_test.dart';
+import 'package:keeping/util/ocr_test2.dart';
 
 //전역변수들
 final List<Map<String, dynamic>> missions = [
@@ -107,6 +108,7 @@ class _MissonPageState extends State<MissionPage> {
         axiosButton(context),
         cameraButton(context),
         ocrButton(context),
+        ocrButtonML(context),
       ],
     )));
   }
@@ -161,5 +163,20 @@ Widget ocrButton(BuildContext context) {
       );
     },
     child: const Text('ocrTest?'),
+  );
+}
+
+// 구글 ML kit를 이용한 ocr test로 이동하는 버튼
+Widget ocrButtonML(BuildContext context) {
+  return ElevatedButton(
+    onPressed: () async {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MainScreen(),
+        ),
+      );
+    },
+    child: const Text('ocrTest using ML_kit'),
   );
 }
