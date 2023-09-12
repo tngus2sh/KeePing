@@ -27,6 +27,9 @@ public class Member extends TimeBaseEntity {
     @Column(nullable = false)
     private String encryptionPw;
 
+    @Column(unique = true, nullable = false, length = 100)
+    private String memberKey;
+
     @Column(nullable = false, length = 20)
     @Size(max = 20, min = 1)
     private String name;
@@ -45,10 +48,11 @@ public class Member extends TimeBaseEntity {
     private boolean active;
 
     @Builder
-    private Member(Long id, String loginId, String encryptionPw, String name, String phone, LocalDateTime birth, String profileImage, String fcmToken, boolean active) {
+    public Member(Long id, String loginId, String encryptionPw, String memberKey, String name, String phone, LocalDateTime birth, String profileImage, String fcmToken, boolean active) {
         this.id = id;
         this.loginId = loginId;
         this.encryptionPw = encryptionPw;
+        this.memberKey = memberKey;
         this.name = name;
         this.phone = phone;
         this.birth = birth;

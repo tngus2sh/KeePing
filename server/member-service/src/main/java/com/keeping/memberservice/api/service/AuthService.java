@@ -32,6 +32,7 @@ public class AuthService {
         ValueOperations<String, String> redisString = redisTemplate.opsForValue();
 
         String result = redisString.get(VERIFIED_NUMBER + phone);
+        log.debug("[번호 인증 확인] 전화번호 = {}, 키 = {}, 결과 = {}", phone, VERIFIED_NUMBER + phone, result);
         return result != null;
     }
 
@@ -53,6 +54,7 @@ public class AuthService {
         }
 
         redisString.append(VERIFIED_NUMBER + phone, "ok");
+        redisTemplate.expire(VERIFIED_NUMBER + phone, CERTIFICATION_NUMBER_EXPIRE, TimeUnit.SECONDS);
         return true;
     }
 
