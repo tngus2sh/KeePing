@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:keeping/widgets/bottom_nav.dart';
-import 'package:keeping/screens/btn_test/btn_test.dart';
-=======
 import 'package:keeping/screens/child_spending_route_page/child_spending_route_page.dart';
->>>>>>> 22d3927fb62b514f968ea7661942fc38522e5a58
 import 'package:keeping/screens/page3/page3.dart';
 import 'package:keeping/widgets/bottom_modal.dart';
 import 'package:keeping/widgets/confirm_btn.dart';
@@ -17,7 +12,6 @@ class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
         body: Column(
           children: [
             MyHeader(
@@ -26,41 +20,20 @@ class Page1 extends StatelessWidget {
               icon: Icon(Icons.arrow_circle_up),
               path: Page1(),
             ),
-            ConfirmBtn(text: '확인', path: BtnTest()),
+            ConfirmBtn(
+              text: '확인확인',
+              action: Page3(),
+              textColor: Colors.yellow,
+            ),
             testBtn(context),
           ],
         ),
         floatingActionButton: FloatingBtn(
-          text: '페이지3',
-          icon: Icon(Icons.animation),
-          path: Page3(),
+          text: '소비지도',
+          icon: Icon(Icons.map),
+          path: ChildSpendingRoutePage(),
         ),
         bottomNavigationBar: BottomNav());
-=======
-      body: Column(
-        children: [
-          MyHeader(
-            text: '제목',
-            elementColor: Colors.black,
-            icon: Icon(Icons.arrow_circle_up),
-            path: Page1(),
-          ),
-          ConfirmBtn(
-            text: '확인확인', 
-            action: Page3(),
-            textColor: Colors.yellow,
-          ),
-          testBtn(context),
-        ],
-      ),
-      floatingActionButton: FloatingBtn(
-        text: '소비지도', 
-        icon: Icon(Icons.map),
-        path: ChildSpendingRoutePage(),
-      ),
-      bottomNavigationBar: BottomNav()
-    );
->>>>>>> 22d3927fb62b514f968ea7661942fc38522e5a58
   }
 }
 
@@ -90,10 +63,7 @@ Widget testContent(BuildContext context) {
     ),
   );
 }
-<<<<<<< HEAD
-=======
 
 void onPressed(BuildContext context) {
   Navigator.pop(context);
 }
->>>>>>> 22d3927fb62b514f968ea7661942fc38522e5a58
