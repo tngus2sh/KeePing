@@ -10,6 +10,8 @@ import 'package:http/http.dart' as http;
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'package:keeping/util/ocr_test.dart';
+
 // 전역변수
 late String image64;
 String parsedtext = '';
@@ -28,11 +30,10 @@ class CameraTest extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             // 버튼이 눌릴 때 TakePictureScreen으로 이동합니다.
+            _takePhoto();
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => TakePictureScreen(
-                  camera: camera,
-                ),
+                builder: (context) => OcrTest(),
               ),
             );
           },
@@ -109,7 +110,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
             // 사진을 찍고 파일 'image'에 저장합니다.
             final image = await _controller.takePicture();
-            _takePhoto();
+            // _takePhoto();
             if (!mounted) return;
 
             // 사진이 찍힌 경우, 새로운 화면에 이미지를 표시합니다.

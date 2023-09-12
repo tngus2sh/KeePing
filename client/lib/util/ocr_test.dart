@@ -64,7 +64,7 @@ class _OcrTestState extends State<OcrTest> {
 Future<List<int>?> compressImage(String filePath) async {
   final result = await FlutterImageCompress.compressWithFile(
     filePath,
-    quality: 50, // 이미지 품질 (0-100)
+    quality: 85, // 이미지 품질 (0-100)
   );
 
   return result;
