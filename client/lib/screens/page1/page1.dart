@@ -5,6 +5,7 @@ import 'package:keeping/widgets/bottom_modal.dart';
 import 'package:keeping/widgets/confirm_btn.dart';
 import 'package:keeping/widgets/floating_btn.dart';
 import 'package:keeping/widgets/header.dart';
+import 'package:keeping/widgets/bottom_nav.dart';
 
 class Page1 extends StatelessWidget {
   const Page1({super.key});
