@@ -60,7 +60,7 @@ public class AccountServiceImpl implements AccountService {
 
         MessageDto messageDto = MessageDto.builder()
                 .to(dto.getPhone())
-                .content("[KeePing]\n인증번호 [" + authNumber + "]를 입력해 주세요.")
+                .content("[KeePing] 인증번호 [" + authNumber + "]를 입력해 주세요.")
                 .build();
 
         SmsResponseDto response = smsServiceImpl.sendSmsMessage(messageDto);
