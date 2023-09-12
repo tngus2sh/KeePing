@@ -7,8 +7,13 @@ import Foundation
 
 import file_selector_macos
 import path_provider_foundation
+import geolocator_apple
+
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FileSelectorPlugin.register(with: registry.registrar(forPlugin: "FileSelectorPlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
+
+func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
+  GeolocatorPlugin.register(with: registry.registrar(forPlugin: "GeolocatorPlugin"))
 }
