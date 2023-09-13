@@ -2,6 +2,7 @@ package com.keeping.bankservice.api.controller.piggy;
 
 import com.keeping.bankservice.api.ApiResponse;
 import com.keeping.bankservice.api.controller.piggy.request.AddPiggyRequest;
+import com.keeping.bankservice.api.controller.piggy.response.ShowPiggyResponse;
 import com.keeping.bankservice.api.service.piggy.PiggyService;
 import com.keeping.bankservice.api.service.piggy.dto.AddPiggyDto;
 import com.keeping.bankservice.global.exception.NotFoundException;
@@ -12,11 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/piggy")
+@RequestMapping("/bank-service/piggy")
 public class PiggyApiController {
 
     private final PiggyService piggyService;
@@ -39,5 +41,17 @@ public class PiggyApiController {
         }
 
         return ApiResponse.ok(null);
+    }
+
+    @GetMapping("/{member-key}")
+    public ApiResponse<List<ShowPiggyResponse>> showPiggy(@PathVariable("member-key") String memberKey) {
+        log.debug("showPiggy");
+
+        try {
+            List<ShowPiggyResponse> response = piggyService.showPiggy(memberKey);
+            return ApiResponse.ok(response);
+        } catch (IOException e) {
+            return ApiResponse.of(1, HttpStatus.SERVICE_UNAVAILABLE, "저금통 정보를 불러오는 중 문제가 생겼습니다. 잠시 후 다시 시도해 주세요.", null);
+        }
     }
 }

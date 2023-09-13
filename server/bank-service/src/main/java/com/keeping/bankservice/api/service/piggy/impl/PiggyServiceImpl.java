@@ -1,14 +1,18 @@
 package com.keeping.bankservice.api.service.piggy.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.keeping.bankservice.api.controller.piggy.response.ShowPiggyResponse;
 import com.keeping.bankservice.api.service.piggy.PiggyService;
 import com.keeping.bankservice.api.service.piggy.dto.AddPiggyDto;
+import com.keeping.bankservice.api.service.piggy.dto.ShowPiggyDto;
 import com.keeping.bankservice.domain.piggy.Piggy;
+import com.keeping.bankservice.domain.piggy.repository.PiggyQueryRepository;
 import com.keeping.bankservice.domain.piggy.repository.PiggyRepository;
 import com.keeping.bankservice.global.exception.NotFoundException;
 import com.keeping.bankservice.global.exception.ServerException;
 import com.keeping.bankservice.global.utils.RedisUtils;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,8 +20,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -30,6 +35,7 @@ public class PiggyServiceImpl implements PiggyService {
     private String piggyPath;
 
     private final PiggyRepository piggyRepository;
+    private final PiggyQueryRepository piggyQueryRepository;
     private final PasswordEncoder passwordEncoder;
     private final RedisUtils redisUtils;
 
@@ -61,6 +67,22 @@ public class PiggyServiceImpl implements PiggyService {
         }
 
         throw new ServerException("503", HttpStatus.SERVICE_UNAVAILABLE, "저금통 개설 과정 중 문제가 생겼습니다. 잠시 후 다시 시도해 주세요.");
+    }
+
+    @Override
+    public List<ShowPiggyResponse> showPiggy(String memberKey) throws IOException {
+        List<ShowPiggyDto> result = piggyQueryRepository.showPiggy(memberKey);
+
+        List<ShowPiggyResponse> response = new ArrayList<>();
+
+        for(ShowPiggyDto dto: result) {
+            InputStream in = new FileInputStream(piggyPath + "\\" + dto.getSavedImage());
+            ShowPiggyResponse piggyResponse = ShowPiggyResponse.toResponse(dto, IOUtils.toByteArray(in));
+
+            response.add(piggyResponse);
+        }
+
+        return response;
     }
 
     private String createNewPiggyAccountNumber() throws JsonProcessingException {
