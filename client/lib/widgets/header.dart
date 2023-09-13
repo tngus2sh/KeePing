@@ -12,7 +12,7 @@ class MyHeader extends StatelessWidget implements PreferredSizeWidget {
       {super.key,
       required this.text,
       this.bgColor = Colors.transparent,
-      required this.elementColor,
+      this.elementColor = Colors.black,
       this.icon,
       this.path});
 

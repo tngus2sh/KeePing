@@ -30,7 +30,6 @@ class Page1 extends StatelessWidget {
             ConfirmBtn(
               text: '자녀 메인페이지',
               action: ChildMainPage(),
-              textColor: Colors.yellow,
             ),
           ],
         ),
