@@ -32,7 +32,7 @@ spring:
         - id: member-service
           uri: lb://MEMBER-SERVICE
           predicates:
-            - Path=/member-service/join
+            - Path=/member-service/join/**
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie

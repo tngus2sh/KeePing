@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -43,6 +44,12 @@ public class MemberService implements UserDetailsService {
         return new User(member.getLoginId(), member.getEncryptionPw(),
                 true, true, true, true,
                 new ArrayList<>()); //권한
+    }
+
+    public Member getUserDetailsByLoginId(String loginId) {
+        Member member = memberRepository.findByLoginId(loginId).orElseThrow(() -> new NoSuchElementException("등록되지 않은 사용자입니다."));
+
+        return member;
     }
 
     public String addParent(AddMemberDto dto) {

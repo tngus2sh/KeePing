@@ -1,7 +1,9 @@
 package com.keeping.memberservice.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.keeping.memberservice.api.controller.request.LoginRequest;
 import com.keeping.memberservice.api.service.member.MemberService;
+import com.keeping.memberservice.domain.Member;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -34,34 +36,34 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         super.setAuthenticationManager(authenticationManager);
         this.memberService = memberService;
         this.env = env;
-        byte[] keyBytes = Decoders.BASE64.decode("dladnxordldPflghdtmdwnsrlatnwlstjdydwnstlstjdwn");
+        byte[] keyBytes = Decoders.BASE64.decode(this.env.getProperty("jwt.secret"));
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-//    @Override
-//    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-//        try {
-//            LoginRequest creds = new ObjectMapper().readValue(request.getInputStream(), LoginRequest.class);
-//
-//            return getAuthenticationManager()
-//                .authenticate(new UsernamePasswordAuthenticationToken(creds.getEmail(), creds.getPassword(), new ArrayList<>()));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        try {
+            LoginRequest creds = new ObjectMapper().readValue(request.getInputStream(), LoginRequest.class);
 
-//    @Override
-//    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) {
-//        String username = ((User) authResult.getPrincipal()).getUsername();
-//        Member member = memberService.getUserDetailsByEmail(username);
-//
-//        String token = Jwts.builder()
-//            .setSubject(member.getMemberKey())
-//            .setExpiration(new Date(System.currentTimeMillis() + 86400000))
-//            .signWith(key, SignatureAlgorithm.HS256)
-//            .compact();
-//
-//        response.addHeader("token", token);
-//        response.addHeader("memberKey", member.getMemberKey());
-//    }
+            return getAuthenticationManager()
+                .authenticate(new UsernamePasswordAuthenticationToken(creds.getLoginId(), creds.getLoginPw(), new ArrayList<>()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) {
+        String username = ((User) authResult.getPrincipal()).getUsername();
+        Member member = memberService.getUserDetailsByLoginId(username);
+
+        String token = Jwts.builder()
+            .setSubject(member.getMemberKey())
+            .setExpiration(new Date(System.currentTimeMillis() + 86400000))
+            .signWith(key, SignatureAlgorithm.HS256)
+            .compact();
+
+        response.addHeader("token", token);
+        response.addHeader("memberKey", member.getMemberKey());
+    }
 }
