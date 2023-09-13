@@ -40,7 +40,7 @@ public class MemberController {
 
     @PostMapping("/join/child")
     public ApiResponse<String> joinChild(@RequestBody @Valid JoinChildRequest request) {
-        log.debug("[멤버 회원가입-Controller]");
+        log.debug("[자녀 회원가입-Controller]");
 
         AddMemberDto dto = createAddMemberDto(request.getLoginId(), request.getLoginPw(), request.getName(), request.getPhone(), request.getBirth());
 
