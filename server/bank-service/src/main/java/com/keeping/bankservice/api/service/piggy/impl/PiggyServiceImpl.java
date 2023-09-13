@@ -5,6 +5,7 @@ import com.keeping.bankservice.api.service.piggy.PiggyService;
 import com.keeping.bankservice.api.service.piggy.dto.AddPiggyDto;
 import com.keeping.bankservice.domain.piggy.Piggy;
 import com.keeping.bankservice.domain.piggy.repository.PiggyRepository;
+import com.keeping.bankservice.global.exception.NotFoundException;
 import com.keeping.bankservice.global.exception.ServerException;
 import com.keeping.bankservice.global.utils.RedisUtils;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,10 @@ public class PiggyServiceImpl implements PiggyService {
     @Override
     public Long addPiggy(String memberKey, AddPiggyDto dto) throws IOException {
         String piggyAccountNumber = createNewPiggyAccountNumber();
+
+        if(dto.getUploadImage() == null) {
+            throw new NotFoundException("404", HttpStatus.NOT_FOUND, "이미지가 존재하지 않습니다.");
+        }
 
         File folder = new File(piggyPath);
         if(!folder.exists()) {
