@@ -2,6 +2,7 @@ package com.keeping.memberservice.api.controller;
 
 import com.keeping.memberservice.api.ApiResponse;
 import com.keeping.memberservice.api.controller.request.PasswordCheckRequest;
+import com.keeping.memberservice.api.controller.request.SetFcmTokenRequest;
 import com.keeping.memberservice.api.controller.request.UpdateLoginPwRequest;
 import com.keeping.memberservice.api.controller.response.MemberResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +18,16 @@ import javax.validation.Valid;
 public class MemberAuthController {
 
 
-    @PostMapping("/{memberKey}/profile")
-    public ApiResponse<String> updateProfileImage(@PathVariable String memberKey) {
+    @PostMapping("/{memberKey}/fcm-token")
+    public ApiResponse<String> setFcmToken(@PathVariable String memberKey,
+                                           @RequestBody @Valid SetFcmTokenRequest request) {
+        // TODO: 2023-09-14 fcm token
+        return ApiResponse.ok("");
+    }
+
+    @PostMapping("/{memberKey}/profile/{imageNum}")
+    public ApiResponse<String> updateProfileImage(@PathVariable String memberKey,
+                                                  @PathVariable String imageNum) {
         // TODO: 2023-09-14 프로필 이미지 변경
         return ApiResponse.ok("");
     }
