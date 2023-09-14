@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:keeping/screens/signup_page/signup_user_type_select_page.dart';
 import 'package:keeping/widgets/header.dart';
 import 'package:keeping/widgets/confirm_btn.dart';
+import 'package:keeping/util/build_text_form_field.dart';
 
 TextEditingController _userId = TextEditingController();
 TextEditingController _userPw = TextEditingController();
@@ -59,35 +60,11 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-// 텍스트 필드 생성
-Widget _buildTextField(
-    {required TextEditingController controller,
-    required String labelText,
-    required String hintText,
-    required String? Function(String?) validator, // 추가: 유효성 검사 함수
-    bool obscureText = false}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      TextFormField(
-        controller: controller,
-        obscureText: obscureText,
-        validator: validator,
-        autovalidateMode: AutovalidateMode.always,
-        decoration: InputDecoration(labelText: labelText, hintText: hintText),
-      ),
-      SizedBox(
-        height: 16.0,
-      )
-    ],
-  );
-}
-
 // 초기 로그인 텍스트 렌더링
 Widget renderLoginText() {
   return Column(
     children: [
-      _buildTextField(
+      BuildTextFormField(
           controller: _userId,
           labelText: '아이디',
           hintText: '아이디를 입력해 주세요.',
@@ -97,7 +74,7 @@ Widget renderLoginText() {
             }
             return null;
           }),
-      _buildTextField(
+      BuildTextFormField(
           controller: _userPw,
           labelText: '비밀번호',
           hintText: '비밀번호를 입력해 주세요.',

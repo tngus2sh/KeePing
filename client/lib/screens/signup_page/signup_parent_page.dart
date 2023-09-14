@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:keeping/widgets/header.dart';
 import 'package:keeping/widgets/bottom_btn.dart';
 import 'package:keeping/screens/signup_page/widgets/signup_nickname_dupli.dart';
+import 'package:keeping/util/build_text_form_field.dart';
 
 TextEditingController _userId = TextEditingController();
 TextEditingController _userPw = TextEditingController();
@@ -58,104 +59,99 @@ class _SignUpParentPageState extends State<SignUpParentPage> {
   }
 }
 
-// 아래에서 호출한 요소들로 필드 만들기
-Widget _buildTextField({
-  required TextEditingController controller,
-  required String labelText,
-  required String hintText,
-  bool obscureText = false, // input 받을 때 가릴지 안 가릴지
-  required String? Function(String?) validator, // 추가: 유효성 검사 함수
-}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      TextFormField(
-        controller: controller,
-        obscureText: obscureText,
-        decoration: InputDecoration(labelText: labelText, hintText: hintText),
-        textInputAction: TextInputAction.next,
-        validator: validator,
-        //유효성 검사 자동으로 실시
-        autovalidateMode: AutovalidateMode.always,
-      ),
-      SizedBox(
-        height: 16.0,
-      )
-    ],
-  );
-}
-
 // 회원가입에 필요한 요소들 호출
 Widget renderSignupText() {
   return Column(
     children: [
-      _buildTextField(
-          controller: _userId,
-          labelText: '아이디',
-          hintText: '아이디를 입력해주세요.',
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return '필수 항목입니다';
-            }
-            return null;
-          }),
-      _buildTextField(
-          controller: _userPw,
-          labelText: '비밀번호',
-          hintText: '비밀번호를 입력해주세요.',
-          obscureText: true,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return '필수 항목입니다';
-            }
-            return null;
-          }),
+      BuildTextFormField(
+        controller: _userId,
+        labelText: '아이디',
+        hintText: '아이디를 입력해주세요.',
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return '필수 항목입니다';
+          } else if (value.length < 5) {
+            return '아이디는 5글자 이상이 되어야 합니다.';
+          } else if (value.length > 20) {
+            return '아이디는 20글자 이하가 되어야 합니다.';
+          } else if (!value.contains(RegExp(r'[a-zA-Z]'))) {
+            return '아이디에는 영어가 1자 이상 포함되어야 합니다.';
+          }
+          return null;
+        },
+      ),
       NicknameDuplicateButton(
         onPressed: () {
           checkNicknameDup(_userId.text);
         },
       ),
-      _buildTextField(
-          controller: _userPwCk,
-          labelText: '비밀번호확인',
-          hintText: '비밀번호를 한 번 더 입력해주세요.',
-          obscureText: true,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return '필수 항목입니다';
-            }
-            return null;
-          }),
-      _buildTextField(
-          controller: _userName,
-          labelText: '이름',
-          hintText: '이름을 입력해주세요.',
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return '필수 항목입니다';
-            }
-            return null;
-          }),
-      _buildTextField(
-          controller: _userBirth,
-          labelText: '생년월일',
-          hintText: 'YYMMDD',
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return '필수 항목입니다';
-            }
-            return null;
-          }),
-      _buildTextField(
-          controller: _userPhoneNumber,
-          labelText: '휴대폰 번호',
-          hintText: '- 없이 숫자만 입력해주세요. (예:01012345678)',
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return '필수 항목입니다';
-            }
-            return null;
-          }),
+      BuildTextFormField(
+        controller: _userPw,
+        labelText: '비밀번호',
+        hintText: '비밀번호를 입력해주세요.',
+        obscureText: true,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return '필수 항목입니다';
+          } else if (value.length < 5) {
+            return '비밀번호는 5자 이상이 되어야 합니다';
+          } else if (value.length > 25) {
+            return '비밀번호는 25자 이하가 되어야 합니다.';
+          }
+          return null;
+        },
+      ),
+      BuildTextFormField(
+        controller: _userPwCk,
+        labelText: '비밀번호확인',
+        hintText: '비밀번호를 한 번 더 입력해주세요.',
+        obscureText: true,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return '필수 항목입니다';
+          } else if (value.length < 5) {
+            return '비밀번호는 5자 이상이 되어야 합니다';
+          } else if (value.length > 25) {
+            return '비밀번호는 25자 이하가 되어야 합니다.';
+          } else if (value != _userPw.text) {
+            return '비밀번호와 일치하지 않습니다.';
+          }
+          return null;
+        },
+      ),
+      BuildTextFormField(
+        controller: _userName,
+        labelText: '이름',
+        hintText: '이름을 입력해주세요.',
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return '필수 항목입니다';
+          }
+          return null;
+        },
+      ),
+      BuildTextFormField(
+        controller: _userBirth,
+        labelText: '생년월일',
+        hintText: 'YYYY-MM-DD',
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return '필수 항목입니다';
+          }
+          return null;
+        },
+      ),
+      BuildTextFormField(
+        controller: _userPhoneNumber,
+        labelText: '휴대폰 번호',
+        hintText: '- 없이 숫자만 입력해주세요. (예:01012345678)',
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return '필수 항목입니다';
+          }
+          return null;
+        },
+      ),
     ],
   );
 }
