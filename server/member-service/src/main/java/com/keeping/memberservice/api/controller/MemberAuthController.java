@@ -5,6 +5,7 @@ import com.keeping.memberservice.api.controller.request.PasswordCheckRequest;
 import com.keeping.memberservice.api.controller.request.SetFcmTokenRequest;
 import com.keeping.memberservice.api.controller.request.UpdateLoginPwRequest;
 import com.keeping.memberservice.api.controller.response.ChildrenResponse;
+import com.keeping.memberservice.api.controller.response.LinkResultResponse;
 import com.keeping.memberservice.api.controller.response.LinkcodeResponse;
 import com.keeping.memberservice.api.controller.response.MemberResponse;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -20,6 +22,13 @@ import java.util.List;
 @Slf4j
 public class MemberAuthController {
 
+    @PostMapping("/{type}/link")
+    public ApiResponse<LinkResultResponse> link(@PathVariable String memberKey,
+                                              @PathVariable String type,
+                                              @RequestBody @Valid @NotBlank String linkcode) {
+        // TODO: 2023-09-14 연결
+        return ApiResponse.ok(LinkResultResponse.builder().build());
+    }
 
     @GetMapping("/{type}/linkcode")
     public ApiResponse<LinkcodeResponse> getLinkcode(@PathVariable String memberKey,
