@@ -2,8 +2,9 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
-import 'package:keeping/util/result_screen.dart';
+// import 'package:google_mlkit_text_recognition/src/text_recognizer.dart';
 
+import 'package:keeping/util/result_screen.dart';
 // import 'package:google_ml_kit_for_korean/google_ml_kit_for_korean.dart';
 
 import 'dart:io';
@@ -24,6 +25,9 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   // Add this controller to be able to control de camera
   CameraController? _cameraController;
 
+  // final _textRecognizer =
+  //     TextRecognizer(script: TextRecognitionScript.korean); //텍스트 레코그나이져 한국어
+
   final _textRecognizer = TextRecognizer(); //텍스트 레코그나이져
 
   @override
@@ -39,7 +43,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _stopCamera();
-    _textRecognizer.close();
+    // _textRecognizer.close();
     super.dispose();
   }
 

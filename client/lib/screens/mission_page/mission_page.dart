@@ -8,6 +8,8 @@ import 'package:keeping/widgets/header.dart';
 import 'package:keeping/util/camera_test2.dart';
 import 'package:keeping/util/ocr_test.dart';
 import 'package:keeping/util/ocr_test2.dart';
+import 'package:keeping/provider/counter_test.dart';
+import 'package:keeping/provider/array_test.dart';
 
 //전역변수들
 final List<Map<String, dynamic>> missions = [
@@ -109,6 +111,8 @@ class _MissonPageState extends State<MissionPage> {
         cameraButton(context),
         ocrButton(context),
         ocrButtonML(context),
+        prividerBtn(context),
+        arrayProviderBtn(context),
       ],
     )));
   }
@@ -178,5 +182,35 @@ Widget ocrButtonML(BuildContext context) {
       );
     },
     child: const Text('ocrTest using ML_kit'),
+  );
+}
+
+// 프로바이더(카운터) 테스트로 이동할 버튼 //
+Widget prividerBtn(BuildContext context) {
+  return ElevatedButton(
+    onPressed: () async {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CounterTest(),
+        ),
+      );
+    },
+    child: const Text('provider(counter) test'),
+  );
+}
+
+// 프로바이더(어레이) 테스트로 이동할 버튼 //
+Widget arrayProviderBtn(BuildContext context) {
+  return ElevatedButton(
+    onPressed: () async {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ArrayTest(),
+        ),
+      );
+    },
+    child: const Text('provider(array) test'),
   );
 }

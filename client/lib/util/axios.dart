@@ -29,6 +29,7 @@ Future<List<dynamic>?> axiosGet(
   try {
     var response = await http.get(Uri.parse(url), headers: headers);
     if (response.statusCode == 200) {
+      // var result = jsonDecode(response.body);
       var result = jsonDecode(response.body);
       return result;
     } else {
