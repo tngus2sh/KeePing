@@ -5,6 +5,7 @@ import com.keeping.memberservice.api.controller.request.PasswordCheckRequest;
 import com.keeping.memberservice.api.controller.request.SetFcmTokenRequest;
 import com.keeping.memberservice.api.controller.request.UpdateLoginPwRequest;
 import com.keeping.memberservice.api.controller.response.ChildrenResponse;
+import com.keeping.memberservice.api.controller.response.LinkcodeResponse;
 import com.keeping.memberservice.api.controller.response.MemberResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,13 @@ import java.util.List;
 @Slf4j
 public class MemberAuthController {
 
+
+    @PostMapping("/{type}/linkcode")
+    public ApiResponse<LinkcodeResponse> createLinkcode(@PathVariable String memberKey,
+                                                        @PathVariable String type) {
+        // TODO: 2023-09-14 연결 코드 생성
+        return ApiResponse.ok(LinkcodeResponse.builder().build());
+    }
 
     @GetMapping("/children")
     public ApiResponse<List<ChildrenResponse>> getChildrenList(@PathVariable String memberKey) {
