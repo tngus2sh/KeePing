@@ -24,8 +24,8 @@ public class MemberAuthController {
 
     @PostMapping("/{type}/link")
     public ApiResponse<LinkResultResponse> link(@PathVariable String memberKey,
-                                              @PathVariable String type,
-                                              @RequestBody @Valid @NotBlank String linkcode) {
+                                                @PathVariable String type,
+                                                @RequestBody @Valid @NotBlank String linkcode) {
         // TODO: 2023-09-14 연결
         return ApiResponse.ok(LinkResultResponse.builder().build());
     }
