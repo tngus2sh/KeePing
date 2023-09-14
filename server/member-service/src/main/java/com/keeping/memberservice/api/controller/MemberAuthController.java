@@ -17,6 +17,12 @@ import javax.validation.Valid;
 public class MemberAuthController {
 
 
+    @PostMapping("/{memberKey}/profile")
+    public ApiResponse<String> updateProfileImage(@PathVariable String memberKey) {
+        // TODO: 2023-09-14 프로필 이미지 변경
+        return ApiResponse.ok("");
+    }
+
     @GetMapping("/member/{memberKey}")
     public ApiResponse<MemberResponse> getMember(@PathVariable String memberKey) {
         // TODO: 2023-09-14 회원정보조회
