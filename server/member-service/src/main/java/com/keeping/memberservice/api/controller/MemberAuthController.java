@@ -4,12 +4,14 @@ import com.keeping.memberservice.api.ApiResponse;
 import com.keeping.memberservice.api.controller.request.PasswordCheckRequest;
 import com.keeping.memberservice.api.controller.request.SetFcmTokenRequest;
 import com.keeping.memberservice.api.controller.request.UpdateLoginPwRequest;
+import com.keeping.memberservice.api.controller.response.ChildrenResponse;
 import com.keeping.memberservice.api.controller.response.MemberResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,6 +19,12 @@ import javax.validation.Valid;
 @Slf4j
 public class MemberAuthController {
 
+
+    @GetMapping("/{memberKey}/children")
+    public ApiResponse<List<ChildrenResponse>> getChildrenList(@PathVariable String memberKey) {
+        // TODO: 2023-09-14 자녀 목록 출력
+        return ApiResponse.ok(null);
+    }
 
     @PostMapping("/{memberKey}/fcm-token")
     public ApiResponse<String> setFcmToken(@PathVariable String memberKey,
