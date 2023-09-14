@@ -1,7 +1,7 @@
-package com.keeping.bankservice.api.controller.piggy.response;
+package com.completionism.keeping.api.controller.piggy.response;
 
-import com.keeping.bankservice.api.service.piggy.dto.ShowPiggyDto;
-import com.keeping.bankservice.domain.piggy.Completed;
+import com.completionism.keeping.api.service.piggy.dto.ShowPiggyDto;
+import com.completionism.keeping.domain.piggy.Completed;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,12 +18,12 @@ public class ShowPiggyResponse {
     private String content;
     private int goalMoney;
     private int balance;
-    private String savedImage;
+    private byte[] savedImage;
     private Completed completed;
 
 
     @Builder
-    private ShowPiggyResponse(Long id, String childKey, String accountNumber, String content, int goalMoney, int balance, String savedImage, Completed completed) {
+    private ShowPiggyResponse(Long id, String childKey, String accountNumber, String content, int goalMoney, int balance, byte[] savedImage, Completed completed) {
         this.id = id;
         this.childKey = childKey;
         this.accountNumber = accountNumber;
@@ -34,7 +34,7 @@ public class ShowPiggyResponse {
         this.completed = completed;
     }
 
-    public static ShowPiggyResponse toResponse(ShowPiggyDto dto, String base64Image) {
+    public static ShowPiggyResponse toResponse(ShowPiggyDto dto, byte[] savedImage) {
         return ShowPiggyResponse.builder()
                 .id(dto.getId())
                 .childKey(dto.getChildKey())
@@ -42,7 +42,7 @@ public class ShowPiggyResponse {
                 .content(dto.getContent())
                 .goalMoney(dto.getGoalMoney())
                 .balance(dto.getBalance())
-                .savedImage(base64Image)
+                .savedImage(savedImage)
                 .completed(dto.getCompleted())
                 .build();
     }
