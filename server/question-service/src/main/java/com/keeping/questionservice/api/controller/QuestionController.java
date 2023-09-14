@@ -1,6 +1,7 @@
 package com.keeping.questionservice.api.controller;
 
 import com.keeping.questionservice.api.ApiResponse;
+import com.keeping.questionservice.api.controller.request.AddAnswerRequest;
 import com.keeping.questionservice.api.controller.request.AddQuestionRequest;
 import com.keeping.questionservice.api.controller.response.QuestionResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,13 @@ import java.util.List;
 public class QuestionController {
 
 
+    @PostMapping("/{questionId}/answer")
+    public ApiResponse<String> addAnswer(@RequestBody AddAnswerRequest request,
+                                         @PathVariable String memberKey,
+                                         @PathVariable String questionId) {
+        return ApiResponse.ok("");
+    }
+
     @GetMapping("/questions")
     public ApiResponse<List<QuestionResponse>> getQuestionList(@PathVariable String memberKey) {
         // TODO: 2023-09-14 질문 목록 조회
@@ -24,8 +32,8 @@ public class QuestionController {
     }
 
     @GetMapping("/questions/{date}")
-    private ApiResponse<QuestionResponse> getQuestion(@PathVariable String memberKey,
-                                                      @PathVariable String date) {
+    public ApiResponse<QuestionResponse> getQuestion(@PathVariable String memberKey,
+                                                     @PathVariable String date) {
         // TODO: 2023-09-14 질문 조회
         return ApiResponse.ok(QuestionResponse.builder().build());
     }
