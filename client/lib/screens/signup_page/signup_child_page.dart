@@ -49,7 +49,7 @@ class _SignUpChildPageState extends State<SignUpChildPage> {
       ),
       bottomNavigationBar: BottomBtn(
         text: '회원가입자녀',
-        onPressed: (BuildContext context) {
+        action: (BuildContext context) {
           //유효성 검사 전부 통과하면 회원가입
           if (_signupKey.currentState!.validate()) {
             signUp();
