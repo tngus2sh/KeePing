@@ -21,6 +21,13 @@ import java.util.List;
 public class MemberAuthController {
 
 
+    @GetMapping("/{type}/linkcode")
+    public ApiResponse<LinkcodeResponse> getLinkcode(@PathVariable String memberKey,
+                                                     @PathVariable String type) {
+        // TODO: 2023-09-14 만료시간 요청
+        return ApiResponse.ok(LinkcodeResponse.builder().build());
+    }
+
     @PostMapping("/{type}/linkcode")
     public ApiResponse<LinkcodeResponse> createLinkcode(@PathVariable String memberKey,
                                                         @PathVariable String type) {
