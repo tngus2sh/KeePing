@@ -15,44 +15,44 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/member-service/auth")
+@RequestMapping("/member-service/auth/{memberKey}")
 @Slf4j
 public class MemberAuthController {
 
 
-    @GetMapping("/{memberKey}/children")
+    @GetMapping("/children")
     public ApiResponse<List<ChildrenResponse>> getChildrenList(@PathVariable String memberKey) {
         // TODO: 2023-09-14 자녀 목록 출력
         return ApiResponse.ok(null);
     }
 
-    @PostMapping("/{memberKey}/fcm-token")
+    @PostMapping("/fcm-token")
     public ApiResponse<String> setFcmToken(@PathVariable String memberKey,
                                            @RequestBody @Valid SetFcmTokenRequest request) {
         // TODO: 2023-09-14 fcm token
         return ApiResponse.ok("");
     }
 
-    @PostMapping("/{memberKey}/profile/{imageNum}")
+    @PostMapping("/profile/{imageNum}")
     public ApiResponse<String> updateProfileImage(@PathVariable String memberKey,
                                                   @PathVariable String imageNum) {
         // TODO: 2023-09-14 프로필 이미지 변경
         return ApiResponse.ok("");
     }
 
-    @GetMapping("/member/{memberKey}")
+    @GetMapping
     public ApiResponse<MemberResponse> getMember(@PathVariable String memberKey) {
         // TODO: 2023-09-14 회원정보조회
         return ApiResponse.ok(MemberResponse.builder().build());
     }
 
-    @DeleteMapping("/member/{memberKey}")
+    @DeleteMapping
     public ApiResponse<String> deleteMember(@PathVariable String memberKey) {
         // TODO: 2023-09-14 회원 탈퇴
         return ApiResponse.ok("탈퇴되었습니다.");
     }
 
-    @PatchMapping("/member/{memberKey}")
+    @PatchMapping
     public ApiResponse<String> updateLoginPw(@PathVariable String memberKey,
                                              @RequestBody @Valid UpdateLoginPwRequest request) {
         // TODO: 2023-09-14 비밀번호 변경
