@@ -24,11 +24,10 @@ public class Account extends TimeBaseEntity {
     private String memberKey;
 
     @Column(name = "account_number", unique = true, nullable = false)
-    @Size(min = 18, max = 18)
+    @Size(min = 16, max = 18)
     private String accountNumber;
 
     @Column(name = "auth_password", nullable = false)
-    @Size(min = 6, max = 6)
     private String authPassword;
 
     @Column(nullable = false)

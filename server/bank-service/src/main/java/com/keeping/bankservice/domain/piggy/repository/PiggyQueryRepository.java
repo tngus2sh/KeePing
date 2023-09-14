@@ -31,7 +31,7 @@ public class PiggyQueryRepository {
                         piggy.savedImage,
                         piggy.completed))
                 .from(piggy)
-                .where(piggy.childKey.eq(memberKey))
+                .where(piggy.childKey.eq(memberKey), piggy.active.isTrue())
                 .fetch();
 
         return result;

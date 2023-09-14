@@ -41,6 +41,9 @@ public class AccountApiController {
         catch(JsonProcessingException e) {
             return ApiResponse.of(1, HttpStatus.SERVICE_UNAVAILABLE, "현재 서비스 이용이 불가능합니다. 잠시 후 다시 시도해 주세요.", null);
         }
+        catch(NoAuthorizationException e) {
+            return ApiResponse.of(1, e.getHttpStatus(), e.getResultMessage(), null);
+        }
     }
 
     @PostMapping("/phone-check/{member-key}")

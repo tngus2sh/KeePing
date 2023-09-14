@@ -5,9 +5,9 @@ import com.keeping.bankservice.api.service.account.AccountService;
 import com.keeping.bankservice.api.service.account.dto.AddAccountDto;
 import com.keeping.bankservice.api.service.account.dto.AuthPhoneDto;
 import com.keeping.bankservice.api.service.account.dto.CheckPhoneDto;
+import com.keeping.bankservice.api.service.sms.SmsService;
 import com.keeping.bankservice.api.service.sms.dto.MessageDto;
 import com.keeping.bankservice.api.service.sms.dto.SmsResponseDto;
-import com.keeping.bankservice.api.service.sms.impl.SmsServiceImpl;
 import com.keeping.bankservice.domain.account.Account;
 import com.keeping.bankservice.domain.account.repository.AccountRepository;
 import com.keeping.bankservice.global.exception.NoAuthorizationException;
@@ -34,7 +34,7 @@ public class AccountServiceImpl implements AccountService {
     private final PasswordEncoder passwordEncoder;
     private final RedisUtils redisUtils;
     private final ValidationUtils validationUtils;
-    private final SmsServiceImpl smsServiceImpl;
+    private final SmsService smsService;
 
     @Override
     public Long addAccount(String memberKey, AddAccountDto dto) throws JsonProcessingException {
@@ -63,7 +63,7 @@ public class AccountServiceImpl implements AccountService {
                 .content("[KeePing] 인증번호 [" + authNumber + "]를 입력해 주세요.")
                 .build();
 
-        SmsResponseDto response = smsServiceImpl.sendSmsMessage(messageDto);
+        SmsResponseDto response = smsService.sendSmsMessage(messageDto);
     }
 
     @Override
