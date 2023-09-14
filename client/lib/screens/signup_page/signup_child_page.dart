@@ -23,6 +23,31 @@ class SignUpChildPage extends StatefulWidget {
 
 class _SignUpChildPageState extends State<SignUpChildPage> {
   @override
+  //페이지를 초기에 접속하면 input 받는 컨트롤러 초기화
+  void initState() {
+    super.initState();
+    _userId = TextEditingController();
+    _userPw = TextEditingController();
+    _userPwCk = TextEditingController();
+    _userName = TextEditingController();
+    _userBirth = TextEditingController();
+    _userPhoneNumber = TextEditingController();
+    _parentPhoneNumber = TextEditingController();
+  }
+  // 페이지가 파기될 때 컨트롤러를 해제
+
+  @override
+  void dispose() {
+    _userId.dispose();
+    _userPw.dispose();
+    _userPwCk.dispose();
+    _userName.dispose();
+    _userBirth.dispose();
+    _userPhoneNumber.dispose();
+    _parentPhoneNumber.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
