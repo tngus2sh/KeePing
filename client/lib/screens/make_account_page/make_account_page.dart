@@ -112,7 +112,7 @@ class _PhoneVerificationPageState extends State<PhoneVerificationPage> {
             'Content-Type': 'application/json'
           },
           {'code': '237362'}
-        );
+        );  // 3분 30초
         if (response != null) {
           setState(() {
             verificationResult = response.toString();
@@ -138,7 +138,7 @@ class _PhoneVerificationPageState extends State<PhoneVerificationPage> {
             'Content-Type': 'application/json'
           },
           {'authPassword': '123456'}
-        );
+        );  // 3분 30초
         if (response != null) {
           setState(() {
             makeAccountResult = response.toString();
