@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
+import 'package:keeping/screens/make_account_page/make_account_page.dart';
 
 class MakeAccountBtn extends StatelessWidget {
   @override
@@ -23,7 +24,7 @@ class MakeAccountBtn extends StatelessWidget {
         ),
       ),
       onPressed: () {
-        
+        Navigator.push(context, MaterialPageRoute(builder: (_) => MakeAccountPage()));
       },
       child: Row(
         children: const [

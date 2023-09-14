@@ -24,12 +24,12 @@ class BottomBtn extends StatelessWidget {
       height: 70.0,
       child: TextButton(
         onPressed: () {
-          if (action == null) {
-            Navigator.pop(context);
-          } else if (action is Widget) {
+          if (action is Widget) {
             Navigator.push(context, MaterialPageRoute(builder: (_) => action));
+          } else if (action is Function) {
+            action();
           } else {
-            action(context);
+            Navigator.pop(context);
           }
         },
         style: bottomBtnStyle(textColor),
