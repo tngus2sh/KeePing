@@ -2,6 +2,8 @@
             package="com.example.keeping">
     <!-- 카카오맵 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:label="keeping"
         android:name="${applicationName}"
