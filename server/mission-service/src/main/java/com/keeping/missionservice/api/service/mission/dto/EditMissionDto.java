@@ -1,6 +1,6 @@
 package com.keeping.missionservice.api.service.mission.dto;
 
-import com.keeping.missionservice.api.controller.mission.request.AddMissionRequest;
+import com.keeping.missionservice.api.controller.mission.request.EditMissionRequest;
 import com.keeping.missionservice.domain.mission.MissionType;
 import lombok.Builder;
 import lombok.Data;
@@ -8,7 +8,9 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class AddMissionDto {
+public class EditMissionDto {
+
+
     private MissionType type; // 부모가 아이에게, 아이가 부모에게
 
     private String to; // 어떤 아이한테 보내야하는지
@@ -24,7 +26,7 @@ public class AddMissionDto {
     private LocalDate endDate; // 미션 마감일
 
     @Builder
-    public AddMissionDto(MissionType type, String to, String todo, int money, String cheeringMessage, LocalDate startDate, LocalDate endDate) {
+    public EditMissionDto(MissionType type, String to, String todo, int money, String cheeringMessage, LocalDate startDate, LocalDate endDate) {
         this.type = type;
         this.to = to;
         this.todo = todo;
@@ -35,8 +37,8 @@ public class AddMissionDto {
     }
 
     // Dto 객체로 변환
-    public static AddMissionDto toDto(AddMissionRequest request) {
-        return AddMissionDto.builder()
+    public static EditMissionDto toDto(EditMissionRequest request) {
+        return EditMissionDto.builder()
                 .type(request.getType())
                 .to(request.getTo())
                 .todo(request.getTodo())
@@ -46,5 +48,4 @@ public class AddMissionDto {
                 .endDate(request.getEndDate())
                 .build();
     }
-
 }

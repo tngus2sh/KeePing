@@ -1,11 +1,16 @@
 package com.keeping.missionservice.api.service.mission.impl;
 
+import com.keeping.missionservice.api.controller.mission.response.MissionResponse;
 import com.keeping.missionservice.api.service.mission.MissionService;
 import com.keeping.missionservice.api.service.mission.dto.AddMissionDto;
+import com.keeping.missionservice.api.service.mission.dto.EditMissionDto;
+import com.keeping.missionservice.domain.mission.Completed;
 import com.keeping.missionservice.domain.mission.repository.MissionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -59,6 +64,36 @@ public class MissionServiceImpl implements MissionService {
 //        } else {
 //            throw new NotFoundException("404", HttpStatus.NOT_FOUND, "해당 회원을 찾을 수 없습니다.");
 //        }
+        return null;
+    }
+
+    @Override
+    public List<MissionResponse> showMission(String memberId) {
+        return null;
+    }
+
+    @Override
+    public MissionResponse showDetailMission(String memberId, Long missionId) {
+        return null;
+    }
+
+    @Override
+    public Long addComment(String memberId, Long missionId) {
+        return null;
+    }
+
+    @Override
+    public Long editCompleted(String memberId, Long missionId, Completed completed) {
+        return null;
+    }
+
+    @Override
+    public Long editMission(String memberId, EditMissionDto dto) {
+        return null;
+    }
+
+    @Override
+    public Long removeMission(String memberId, Long missionId) {
         return null;
     }
 }
