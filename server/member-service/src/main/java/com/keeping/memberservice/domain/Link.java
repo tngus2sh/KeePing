@@ -1,5 +1,6 @@
 package com.keeping.memberservice.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,4 +25,11 @@ public class Link {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "child_id")
     private Child child;
+
+    @Builder
+    private Link(Long id, Parent parent, Child child) {
+        this.id = id;
+        this.parent = parent;
+        this.child = child;
+    }
 }
