@@ -43,3 +43,7 @@ management:
     web:
       exposure:
         include: refresh, health, beans, info, metrics, prometheus, busrefresh
+        
+fcm:
+  file:
+    name: keeping-95186-firebase-adminsdk-9r919-da255b2f4e.json
