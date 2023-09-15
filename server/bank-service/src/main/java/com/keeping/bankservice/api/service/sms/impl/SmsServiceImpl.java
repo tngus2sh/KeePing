@@ -43,10 +43,6 @@ public class SmsServiceImpl implements SmsService {
     @Value("${sms.senderPhone}")
     private String phone;
 
-//    private final MemberRepository memberRepository;
-//    private final PasswordEncoder passwordEncoder;
-//    private final ValidationUtils validationUtils;
-
     public String makeSignature(Long time) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
         String space = " ";
         String newLine = "\n";
