@@ -1,11 +1,11 @@
-package com.keeping.notiservice.service.impl;
+package com.keeping.notiservice.api.service.impl;
 
-import com.completionism.keeping.sample.notification.api.request.FCMNotificationRequest;
-import com.completionism.keeping.sample.notification.service.FCMNotificationService;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
+import com.keeping.notiservice.api.request.FCMNotificationRequest;
+import com.keeping.notiservice.api.service.FCMNotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
