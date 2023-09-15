@@ -24,11 +24,10 @@ public class Account extends TimeBaseEntity {
     private String memberKey;
 
     @Column(name = "account_number", unique = true, nullable = false)
-    @Size(min = 18, max = 18)
+    @Size(min = 16, max = 18)
     private String accountNumber;
 
     @Column(name = "auth_password", nullable = false)
-    @Size(min = 6, max = 6)
     private String authPassword;
 
     @Column(nullable = false)
@@ -48,14 +47,23 @@ public class Account extends TimeBaseEntity {
         this.active = active;
     }
 
-    public static Account toAccount(String memberKey, String accountNumber, String authPassword, Long balance, boolean active) {
+    public static Account toAccount(String memberKey, String accountNumber, String authPassword) {
         return Account.builder()
                 .memberKey(memberKey)
                 .accountNumber(accountNumber)
                 .authPassword(authPassword)
-                .balance(balance)
-                .active(active)
+                .balance(0l)
+                .active(true)
                 .build();
+    }
+
+    public void updateBalance(int money, boolean plus) {
+        if(plus) {
+            this.balance += money;
+        }
+        else {
+            this.balance -= money;
+        }
     }
 
 }
