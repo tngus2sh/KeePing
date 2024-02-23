@@ -45,8 +45,6 @@ P
 Q.idea/sonarlint/securityhotspotstore/d/5/d500e9c2c355676873409178b11aa2a5c4c07af4,3\3\332ae2ba14f215a26070415f0599daa8af30cbe8
 R
 "server/question-service/Dockerfile,2\3\234e8fd585462ba00120e1636ec0a7d459ccfd77
-A
-client/Dockerfile,8\6\86b9845f28676d6ef06f2f252b8fb6ee4d73815a
 S
 #server/discovery-service/Dockerfile,a\8\a81c2508f4253063b218dda1695f2b052c186196
 Å
