@@ -110,4 +110,4 @@ SpringBoot, Flutter
 
 ---
 
-![아키텍쳐](/uploads/12f02fef4d23b3df834e71b1382a93b9/아키텍쳐.jpg)
+<img src="./readme/Keeping.drawio.png" alt="Architecture" width="800">
